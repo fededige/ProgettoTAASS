@@ -2,10 +2,10 @@
   <button mat-icon-button aria-label="Logo">
     <img  src="../../assets/logo.png">
   </button>
-  <span class="example-spacer"></span>
-  <button mat-button>HOME</button>
-  <button mat-button>CATALOGO</button>
-  <button mat-button>INSERISCI LIBRO</button>
-  <button mat-button>ANNUNCI</button>
-  <button mat-button>LOGIN</button>
+  <span class="spacer"></span>
+  <button mat-button routerLink="home" [routerLinkActive]="'active'">HOME</button>
+  <button mat-button routerLink="catalogo" [routerLinkActive]="'active'">CATALOGO</button>
+  <button mat-button routerLink="inserisci-libro" [routerLinkActive]="'active'">INSERISCI LIBRO</button>
+  <button mat-button routerLink="annunci" [routerLinkActive]="'active'">ANNUNCI</button>
+  <button mat-button routerLink="login" [routerLinkActive]="'active'">LOGIN</button>
 </mat-toolbar>

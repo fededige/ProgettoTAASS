@@ -12,13 +12,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { BookCardComponent } from './book-card/book-card.component';
+import { InputBookComponent } from './input-book/input-book.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CatalogoComponent } from './catalogo/catalogo.component';
+import { AnnunciComponent } from './annunci/annunci.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SearchbarComponent,
-    BookCardComponent
+    BookCardComponent,
+    InputBookComponent,
+    LandingPageComponent,
+    CatalogoComponent,
+    AnnunciComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +40,10 @@ import { BookCardComponent } from './book-card/book-card.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    NgbModule
+    NgbModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
