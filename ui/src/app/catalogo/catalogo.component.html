@@ -1,1 +1,37 @@
-<p>catalogo works!</p>
+<div class="container">
+  <div class="row border">
+    <app-searchbar></app-searchbar>
+  </div>
+  
+  <div class="row m-4 section-tendenza">
+    <div class="row m-1">
+      <div class="col-sm align-self-center">
+        <h1 class="m-2" style="color: white; font-weight: bold;">Libri di tendenza</h1>
+      </div>
+      <div class="col-sm offset-sm-4 text-end">
+        <button class="btn m-2 btn-scopri"><i class="fa-solid fa-arrow-right"></i> Scopri </button>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col-sm" *ngFor="let libro of libriTendenza">
+        <app-book-card [book]='libro'></app-book-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-4 section-piu-letti">
+    <div class="row m-1">
+      <div class="col-sm align-self-center">
+        <h1 class="m-2" style="color: black; font-weight: bold;">I libri più letti</h1>
+      </div>
+      <div class="col-sm offset-sm-4 text-end">
+        <button class="btn m-2 btn-scopri" style="background-color: black !important; color: white !important;"><i class="fa-solid fa-arrow-right"></i> Scopri </button>
+      </div>
+    </div>
+    <div class="row m-1">
+      <div class="col-sm" *ngFor="let libro of libriPiuLetti">
+        <app-book-card [book]='libro'></app-book-card>
+      </div>
+    </div>
+  </div>
+</div>

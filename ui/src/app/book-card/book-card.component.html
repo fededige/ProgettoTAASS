@@ -1,13 +1,13 @@
-<div class="card mb-3" style="width: 25%;">
+<div *ngIf="book" class="card mb-3">
   <div class="row g-0">
     <div class="col-md-6">
-      <img src="../../assets/book.jpg" class="img-fluid rounded-start">
+      <img src="{{ book.cover }}" class="img-fluid rounded-start">
     </div>
     <div class="col-md-6">
       <div class="card-body">
-        <h2 class="card-title">Titolo libro</h2>
-        <p class="card-text">autore</p>
-        <p class="card-text"><small class="text-muted">edizioni disponibili</small></p>
+        <h1 class="card-title">{{ book.title }}</h1>
+        <h2 class="card-text">{{ book.author }}</h2>
+        <h3 class="card-text"><small class="text-muted">{{ book.editions }} edizioni disponibili</small></h3>
         <button type="button" class="form-control btn btn-primary align-self-end">Prenota ora</button>
       </div>
     </div>
