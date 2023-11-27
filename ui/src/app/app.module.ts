@@ -20,6 +20,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { AnnunciComponent } from './annunci/annunci.component';
 import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LoginComponent } from './login/login.component';
     CatalogoComponent,
     AnnunciComponent,
     LoginComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
