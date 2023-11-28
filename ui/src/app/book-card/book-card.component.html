@@ -8,7 +8,7 @@
         <h1 class="card-title">{{ book.title }}</h1>
         <h2 class="card-text">{{ book.author }}</h2>
         <h3 class="card-text"><small class="text-muted">{{ book.editions }} edizioni disponibili</small></h3>
-        <button type="button" class="form-control btn btn-primary align-self-end">Prenota ora</button>
+        <button type="button" class="form-control btn btn-primary align-self-end" routerLink="/catalogo/{{ book.title }}">Prenota ora</button>
       </div>
     </div>
   </div>

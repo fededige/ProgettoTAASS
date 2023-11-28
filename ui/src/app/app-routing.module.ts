@@ -5,11 +5,13 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { AnnunciComponent } from './annunci/annunci.component';
 import { LoginComponent } from './login/login.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: LandingPageComponent},
   { path: 'catalogo', component: CatalogoComponent },
+  { path: 'catalogo/:title', component: BookDetailsComponent},
   { path: 'inserisci-libro', component: InputBookComponent },
   { path: 'annunci', component:  AnnunciComponent},
   { path: 'login', component:  LoginComponent },

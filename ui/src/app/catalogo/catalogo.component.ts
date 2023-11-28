@@ -26,7 +26,8 @@ export class CatalogoComponent {
       "author": "George Orwell",
       "editions": 27,
       "cover": "https://th.bing.com/th/id/OIP.gX0ExEtzFf0AkuD2xmX2iAHaMF?rs=1&pid=ImgDetMain"
-    }
+    },
+    
   ];
 
   libriPiuLetti = [

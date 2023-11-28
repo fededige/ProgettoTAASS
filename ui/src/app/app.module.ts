@@ -21,6 +21,7 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { AnnunciComponent } from './annunci/annunci.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FooterComponent } from './footer/footer.component';
     AnnunciComponent,
     LoginComponent,
     FooterComponent,
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,
