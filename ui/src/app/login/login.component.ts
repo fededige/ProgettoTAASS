@@ -1,10 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy{
+  constructor(private _renderer: Renderer2){
 
-}
+  }
+  ngOnDestroy(): void {
+    this._renderer.removeStyle(document.body, 'overflow');
+  }
+  ngOnInit(): void {
+    this._renderer.setStyle(document.body, 'overflow', 'hidden');
+  }
+
+} 
