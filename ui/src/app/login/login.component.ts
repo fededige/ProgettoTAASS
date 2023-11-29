@@ -6,14 +6,20 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit, OnDestroy{
-  constructor(private _renderer: Renderer2){
-
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
   ngOnDestroy(): void {
-    this._renderer.removeStyle(document.body, 'overflow');
+    throw new Error('Method not implemented.');
   }
-  ngOnInit(): void {
-    this._renderer.setStyle(document.body, 'overflow', 'hidden');
-  }
+  // constructor(private _renderer: Renderer2){
+
+  // }
+  // ngOnDestroy(): void {
+  //   this._renderer.removeStyle(document.body, 'overflow');
+  // }
+  // ngOnInit(): void {
+  //   this._renderer.setStyle(document.body, 'overflow', 'hidden');
+  // }
 
 } 
