@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
-  styleUrl: './catalogo.component.css'
+  styleUrls: ['./catalogo.component.css', './catalogo.component.scss']
 })
 export class CatalogoComponent {
 
@@ -27,7 +27,12 @@ export class CatalogoComponent {
       "editions": 27,
       "cover": "https://th.bing.com/th/id/OIP.gX0ExEtzFf0AkuD2xmX2iAHaMF?rs=1&pid=ImgDetMain"
     },
-    
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "editions": 27,
+      "cover": "https://th.bing.com/th/id/OIP.gX0ExEtzFf0AkuD2xmX2iAHaMF?rs=1&pid=ImgDetMain"
+    },
   ];
 
   libriPiuLetti = [
