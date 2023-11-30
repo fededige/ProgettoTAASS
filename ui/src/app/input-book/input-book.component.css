@@ -12,12 +12,53 @@
     margin: 20px;
 }
 mat-form-field{
-    width: 40%;
+    width: 70%;
     margin: 1%;
     display: block;
+}
+
+mat-input{
+    background-color: #407BFF;
+    color: #407BFF;
+}
+mat-label{
+    background-color: #407BFF;
+    color: #407BFF;
 }
 .title{
     font-size: 250%;
     margin: 2%;
     margin-bottom: 5%;
 }
+
+
+.container{
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    position: relative;
+    top: 30px;
+}
+.col-sm{
+    color: #407BFF;
+    font-size: 1rem;
+     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+}
+
+
+  .rettangolo{
+    background-color: white;
+  }
+  button.btn_scansione{
+    border: white;
+    background-color: white;
+  }
+
+  button.btn_ins-lib{
+    border: white;
+    background-color: #4361EE;
+    color: white;
+  }
+
+  
+  
