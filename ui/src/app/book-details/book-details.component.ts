@@ -11,7 +11,7 @@ export class BookDetailsComponent implements OnInit{
   book_details!: any
 
   constructor(private route: ActivatedRoute) {}
-
+  star = [1, 2, 3, 4, 5];
   ngOnInit(): void {
     this.title = this.route.snapshot.paramMap.get('title')
     // book = getBookDetails(title) ---> prendere dati del libro da visualizzare dal db
@@ -27,7 +27,7 @@ export class BookDetailsComponent implements OnInit{
       "condition": "excellent",
       "edition": "1984",
       "restitution": 30,
-      "evaluation": 4.5
+      "evaluation": 3.5
     }
   }
 }
