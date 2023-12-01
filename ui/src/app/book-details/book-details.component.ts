@@ -24,7 +24,7 @@ export class BookDetailsComponent implements OnInit{
       "owner": "Francesco",
       "price": 4,
       "plot": "‘ 1984 ‘ by George Orwell is a dystopian novel set in a totalitarian society led by the omnipresent Big Brother. The story follows Winston Smith, who works for the Ministry of Truth, altering historical records. Discontent with the regime, Winston begins a forbidden relationship with Julia.",
-      "condition": "excellent",
+      "condition": "bad",
       "edition": "1984",
       "restitution": 30,
       "evaluation": 3.5

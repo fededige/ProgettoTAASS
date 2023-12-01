@@ -1,65 +1,91 @@
-<div class="container">
+<div class="container mb-4">
   <div class="row">
-    <div class="col-lg-4 align-self-center">
-      <img src="{{ book_details.cover }}" class="img-fluid m-4" style="width: 80%; height: 80%;"/>
+    <div class="col-md-4 col-sm-12 align-self-center">
+      <img id="book-cover" alt="copertina" src="{{ book_details.cover }}" class="m-4" style="width: 80%; height: 80%;"/>
     </div>
-    <div class="col-lg-8">
+    <div class="col-md-8">
       <div class="m-5">
-        <div class="row">
-          <div class="col-lg-5">
-            <h1 style="font-weight: bold; font-size: 4em;"> {{ title }} </h1>
-          </div>
-          <div class="col-lg-5 offset-lg-2 text-end">
-            <h1>Proprietario: {{ book_details.owner }}</h1>
-          </div>
+        <div class="row mb-2">
+          <h1 id="book-title" style="font-weight: bold; font-size: 4em;"> {{ title }} <span class="hide">di {{ book_details.author }}</span></h1>
         </div>
         <div class="row">
-          <div class="col-lg-5">
+          <div class="d-lg-block col-lg-4 d-none">
             <h2>di {{ book_details.author }}</h2>
           </div>
-          <div class="col-lg-5 offset-lg-2 text-end">
+          <div class="col-lg-4 col-6 text-end">
+            <h2 id="book-owner">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" class="m-1"><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>
+              {{ book_details.owner }}
+            </h2>
+          </div>
+          <div class="col-lg-4 col-6 vl">
             <div class="ratings">
               <i *ngFor="let s of star;let i as index" class="fa fa-star" [ngClass]="i <= book_details.evaluation ? 'rating-color': ''"></i>
           </div>
           </div>
         </div>
         <div class="details p-1">
-          <h1 class="m-2" style="font-weight: bold">Informazioni</h1>
+          <h1 class="m-2 title" style="font-weight: bold">Informazioni</h1>
           <div class="row">
-            <div class="col-lg-6">
-              <div class="infos m-2 p-3">
-                <h2>Trama</h2>
-                <p>{{ book_details.plot }}</p>
+            <div class="col-xl-7 col-lg-8">
+              <div id="book-plot" class="infos m-2 p-1 d-lg-block d-md-none">
+                <p class="title m-1">Trama</p>
+                <p class="text m-1">{{ book_details.plot }}</p>
               </div>
-              <div class="infos m-2 p-3">
-                <h2>Condizioni</h2>
-                <p> {{ book_details.condition }}</p>
+              <div id="book-conditions" class="infos m-2 p-1">
+                <p class="title m-1">Condizioni</p>
+                <!-- controllo badge condizione ottime -->
+                <ng-template *ngIf="book_details.condition=='excellent'; then badgeOttimoCheck else badgeOttimo"></ng-template>
+                <ng-template #badgeOttimoCheck>
+                  <span class="badge m-1 p-2"><i class="fa fa-check m-1"></i>Ottime</span>
+                </ng-template>
+                <ng-template #badgeOttimo>
+                  <span class="badge m-1 p-2 badge-disabled">Ottime</span>
+                </ng-template>
+
+                <!-- controllo badge condizioni buone-->
+                <ng-template *ngIf="book_details.condition=='good'; then badgeBuonoCheck else badgeBuono"></ng-template>
+                <ng-template #badgeBuonoCheck>
+                  <span class="badge m-1 p-2"><i class="fa fa-check m-1"></i>Buone</span>
+                </ng-template>
+                <ng-template #badgeBuono>
+                  <span class="badge m-1 p-2 badge-disabled">Buone</span>
+                </ng-template>
+
+                <!-- controllo badge condizioni medrocri -->
+                <ng-template *ngIf="book_details.condition=='bad'; then badgeMedriocreCheck else badgeMediocre"></ng-template>
+                <ng-template #badgeMedriocreCheck>
+                  <span class="badge m-1 p-2"><i class="fa fa-check m-1"></i>Mediocri</span>
+                </ng-template>
+                <ng-template #badgeMediocre>
+                  <span class="badge m-1 p-2 badge-disabled">Mediocri</span>
+                </ng-template>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="infos m-2 p-3">
-                <h2>Prezzo</h2>
-                <p>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
-                    <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518z"/>
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                    <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11m0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12"/>
-                  </svg>
+            <div class="col-xl-5 col-lg-4">
+              <div id="book-price" class="infos m-2 p-1">
+                <p class="title m-1">Prezzo</p>
+                <p class="text m-1">
+                  <img src="../../assets/coin.png" class="img-fluid m-1 coin"/>
                   {{ book_details.price}} coins
                 </p>
               </div>
-              <div class="infos m-2 p-3">
-                <h2>Edizione</h2>
-                <p> {{ book_details.edition }}</p>
+              <div id="book-editions" class="infos m-2 p-1">
+                <p class="title m-1">Edizione</p>
+                <p class="text m-1"> {{ book_details.edition }}</p>
               </div>
-              <div class="infos m-2 p-3">
-                <h2>Restituzione</h2>
-                <p> {{ book_details.restitution }} giorni</p>
+              <div id="book-restitution" class="infos m-2 p-1">
+                <p class="title m-1">Restituzione</p>
+                <p class="text m-1"> {{ book_details.restitution }} giorni</p>
               </div>
             </div>
           </div>
         </div> 
+        <button class="btn btn-primary btn-prenota form-control mt-2">Prenota</button>
       </div>
+      
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>
