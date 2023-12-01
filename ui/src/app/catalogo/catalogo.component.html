@@ -13,8 +13,8 @@
       </div>
     </div>
     <div class="row m-1">
-      <div *ngFor="let libro of libriTendenza; index as i"  class="col-sm-3 col-4" [ngClass]="{'d-none d-sm-inline': i === libriTendenza.length - 1}">
-        <app-book-card [book]='libro'></app-book-card>
+      <div *ngFor="let libro of libriTendenza; index as i"  class="d-block col-md-3 col-sm-4 " [ngClass]="{'d-none d-sm-none d-md-inline': i === libriTendenza.length - 1}">
+        <app-book-card class="" [book]='libro'></app-book-card>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="row m-1"> 
-      <div class="col-sm" *ngFor="let libro of libriPiuLetti">
+      <div *ngFor="let libro of libriPiuLetti; index as i"  class="d-block col-md-3 col-sm-4 " [ngClass]="{'d-none d-sm-none d-md-inline': i === libriTendenza.length - 1}">
         <app-book-card [book]='libro'></app-book-card>
       </div>
     </div>

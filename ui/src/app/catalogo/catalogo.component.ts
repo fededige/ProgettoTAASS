@@ -53,6 +53,12 @@ export class CatalogoComponent {
       "author": "Markus Zusak",
       "editions": 10,
       "cover": "https://www.sperling.it/content/uploads/2015/11/978886836304HIG.JPG"
+    },
+    {
+      "title": "Storia di una ladra di libri",
+      "author": "Markus Zusak",
+      "editions": 10,
+      "cover": "https://www.sperling.it/content/uploads/2015/11/978886836304HIG.JPG"
     }
   ]
 }
