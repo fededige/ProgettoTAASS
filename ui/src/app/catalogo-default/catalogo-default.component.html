@@ -1,0 +1,31 @@
+<div class="row m-4 section-tendenza">
+  <div class="row m-1">
+    <div class="col-lg-4 col-md-5 col-sm-6 col-6 align-self-center">
+      <h1 class="m-2" style="color: white; font-weight: bold;">Libri di tendenza</h1>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-5 offset-lg-4 offset-md-3 offset-sm-2 offset-1 text-end">
+      <button class="btn mt-2 btn-scopri"> Scopri <i class="fa fa-arrow-circle-right m-1 icon d-none d-sm-inline" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="row m-1">
+    <div *ngFor="let libro of libriTendenza; index as i"  class="d-block col-md-3 col-sm-4 " [ngClass]="{'d-none d-sm-none d-md-inline': i === libriTendenza.length - 1}">
+      <app-book-card class="" [book]='libro'></app-book-card>
+    </div>
+  </div>
+</div>
+
+<div class="row m-4 section-piu-letti">
+  <div class="row m-1">
+    <div class="col-lg-4 col-md-5 col-sm-6 col-6 align-self-center">
+      <h1 class="m-2" style="color: black; font-weight: bold;">I libri più letti</h1>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-5 offset-lg-4 offset-md-3 offset-sm-2 offset-1 text-end">
+      <button class="btn mt-2 btn-scopri" style="background-color: black !important; color: white !important;"> Scopri <i class="fa fa-arrow-circle-right m-1 icon d-none d-sm-inline" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="row m-1"> 
+    <div *ngFor="let libro of libriPiuLetti; index as i"  class="d-block col-md-3 col-sm-4 " [ngClass]="{'d-none d-sm-none d-md-inline': i === libriTendenza.length - 1}">
+      <app-book-card [book]='libro'></app-book-card>
+    </div>
+  </div>
+</div>
