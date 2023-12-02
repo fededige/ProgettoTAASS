@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-catalogo-search',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './catalogo-search.component.css'
 })
 export class CatalogoSearchComponent {
+  @Input() search_value?: string
 
+  ngOnInit(): void {
+    // qua serve recuperare i dati relativi alla ricerca
+  }
 }

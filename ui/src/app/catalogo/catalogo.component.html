@@ -4,7 +4,7 @@
   </div>
   
   <app-catalogo-default *ngIf="!value"></app-catalogo-default>
-  <app-catalogo-search *ngIf="value"></app-catalogo-search>
+  <app-catalogo-search *ngIf="value" [search_value]="value"></app-catalogo-search>
 </div>
 
 <app-footer></app-footer>

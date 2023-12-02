@@ -8,13 +8,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class SearchbarComponent {
   @Output() searchValue = new EventEmitter<string>()
 
-  seach_field?: string
+  search_field?: string
 
   onInput(e: Event) {
-    this.seach_field = (<HTMLInputElement>e.target).value;
+    this.search_field = (<HTMLInputElement>e.target).value;
   }
 
   search() {
-    this.searchValue.emit(this.seach_field)
+    this.searchValue.emit(this.search_field)
   }
 }
