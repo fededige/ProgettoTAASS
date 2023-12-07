@@ -1,0 +1,11 @@
+.form-control:focus {
+  box-shadow: none;
+}
+
+.mat-icon {
+  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
+}
