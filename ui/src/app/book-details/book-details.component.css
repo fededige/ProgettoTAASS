@@ -147,3 +147,21 @@
     margin-top: 10px;
   }
 }
+
+@media (max-height: 800px) {
+  .footer_large {
+    display:none;
+  }
+  .footer_small {
+    display:block;
+  }
+}
+
+@media (min-height: 801px) {
+  .footer_large {
+    display:block;
+  }
+  .footer_small {
+    display:none;
+  }
+}
