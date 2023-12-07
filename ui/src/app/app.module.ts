@@ -22,6 +22,8 @@ import { AnnunciComponent } from './annunci/annunci.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { CatalogoSearchComponent } from './catalogo-search/catalogo-search.component';
+import { CatalogoDefaultComponent } from './catalogo-default/catalogo-default.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     LoginComponent,
     FooterComponent,
     BookDetailsComponent,
+    CatalogoSearchComponent,
+    CatalogoDefaultComponent,
   ],
   imports: [
     BrowserModule,
