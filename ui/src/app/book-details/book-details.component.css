@@ -148,7 +148,7 @@
   }
 }
 
-@media (max-height: 800px) {
+@media (max-height: 932px) {
   .footer_large {
     display:none;
   }
@@ -157,7 +157,7 @@
   }
 }
 
-@media (min-height: 801px) {
+@media (min-height: 933px) {
   .footer_large {
     display:block;
   }

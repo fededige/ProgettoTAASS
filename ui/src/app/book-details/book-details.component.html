@@ -20,7 +20,7 @@
           </div>
           <div class="col-lg-4 col-6 vl">
             <div class="ratings">
-              <i *ngFor="let s of star;let i as index" class="fa fa-star" [ngClass]="i <= book_details.evaluation ? 'rating-color': ''"></i>
+              <i *ngFor="let s of star; index as i" class="fa fa-star" [ngClass]="i < book_details.evaluation ? 'rating-color': ''"></i>
           </div>
           </div>
         </div>
