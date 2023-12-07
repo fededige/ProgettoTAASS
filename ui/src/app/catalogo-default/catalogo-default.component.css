@@ -1,0 +1,19 @@
+.section-tendenza {
+  background-color: #4361EE;
+  border-radius: 10px;
+}
+
+.section-piu-letti {
+  background-color: #F1F1F1;
+  border-radius: 10px;
+}
+
+.btn-scopri {
+  background-color: white !important;
+  color: black !important;
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 1rem;
+}

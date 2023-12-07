@@ -1,0 +1,167 @@
+.container {
+  background-color: #F1F1F1;
+  border-radius: 5px;
+}
+
+.details {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.infos {
+  background-color: #F1F1F1;
+  border-radius: 5px;
+}
+
+.ratings{
+  margin-right:10px;
+}
+
+.ratings i{
+  color:#cecece;
+  font-size:32px;
+}
+
+.rating-color{
+  color:#fbc634 !important;
+}
+
+.vl {
+  border-left: 2px solid #D1D1D1;
+  height: 80%;
+}
+
+.btn-prenota {
+  background-color: #407BFF;
+  color: white;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.text {
+  color: #919191;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.coin {
+  width: 15%;
+  height: 15%;
+}
+
+.badge {
+  background-color: #407BFF;
+  border-radius: 20px;
+  font-size: 1em;
+}
+
+.badge-disabled {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.hide {
+  display: none;
+}
+
+/* diminuisce le dimensioni delle stelline */
+@media (max-width: 1200px) {
+  .ratings i{
+    font-size: 24px;
+    margin-top: 5px;
+  }
+  #book-title{
+    font-size: 3em !important;
+  }
+}
+
+/* per adattare a schermi medium (md) */
+@media (max-width: 992px) {
+  #book-title{
+    font-size: 2em !important;
+  }
+  .hide{
+    display: inline;
+    font-size: 1.em !important;
+    font-weight: normal;
+  }
+  .text-end{
+    text-align: left !important;
+  }
+  .vl{
+    border: 0px;
+    text-align: right;
+  }
+  .title{
+    font-size: 1.2em;
+  }
+  .badge{
+    font-size: 0.8em;
+  }
+  #book-conditions{
+    margin: 0 !important;
+  }
+  #book-price, #book-editions, #book-restitution{
+    margin: .25em auto !important;
+  }
+  .coin{
+    width: 7%;
+    height: 7%;
+  }
+}
+
+@media (max-width: 768px) {
+  #book-cover{
+    width: 30% !important;
+    height: 30% !important;
+    margin-top: 0.25em auto !important;
+    align-items: center;
+  }
+  #book-plot{
+    margin: 0 !important;
+  }
+  #book-conditions{
+    margin-top: .25em !important;
+  }
+  #book-title{
+    font-size: 1.5em !important;
+    text-align: center;
+    margin: 0 auto !important;
+  }
+}
+
+@media (max-width: 576px) {
+  #book-owner{
+    font-size: 1.2em !important;
+  }
+  #book-owner svg{
+    width: 16px;
+    height: 16px;
+  }
+  .ratings i{
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-height: 932px) {
+  .footer_large {
+    display:none;
+  }
+  .footer_small {
+    display:block;
+  }
+}
+
+@media (min-height: 933px) {
+  .footer_large {
+    display:block;
+  }
+  .footer_small {
+    display:none;
+  }
+}

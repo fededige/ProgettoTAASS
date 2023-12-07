@@ -1,15 +1,11 @@
-<div class="card mb-3" style="width: 25%;">
-  <div class="row g-0">
-    <div class="col-md-6">
-      <img src="../../assets/book.jpg" class="img-fluid rounded-start">
-    </div>
-    <div class="col-md-6">
-      <div class="card-body">
-        <h2 class="card-title">Titolo libro</h2>
-        <p class="card-text">autore</p>
-        <p class="card-text"><small class="text-muted">edizioni disponibili</small></p>
-        <button type="button" class="form-control btn btn-primary align-self-end">Prenota ora</button>
+<div *ngIf="book" id="card-container" class="card p-2 my-4 d-flex" routerLink="/catalogo/{{ book.title }}" style="cursor: pointer;">
+    <img src="{{ book.cover }}">
+    <div class="m-2">
+      <div class="d-flex mt-2">
+        <h1 style="font-weight: bold;">{{ book.title }}</h1>
+      </div>
+      <div  class="d-flex">
+        <h2>di {{ book.author }}</h2>
       </div>
     </div>
-  </div>
-</div>
+</div> 

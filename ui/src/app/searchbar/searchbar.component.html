@@ -1,6 +1,12 @@
-<div class="d-flex justify-content-center">
-  <input class="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search">
-  <button class="btn btn-primary" type="submit">
-    <mat-icon aria-hidden="false" fontIcon="search"></mat-icon>
-  </button>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
+    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+      <div class="input-group">
+        <input type="search" placeholder="Cerca nel catalogo..." class="form-control border-0 bg-light" (input)="onInput($event)">
+        <div class="input-group-append align-items-center">
+          <button id="button-addon1" (click)="search()" type="submit" class="btn btn-link text-primary"><mat-icon class="mat-icon">search</mat-icon></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

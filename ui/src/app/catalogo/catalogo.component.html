@@ -1,1 +1,10 @@
-<p>catalogo works!</p>
+<div class="container">
+  <div class="row">
+    <app-searchbar (searchValue)="onGetSearchValue($event)"></app-searchbar>
+  </div>
+  
+  <app-catalogo-default *ngIf="!value"></app-catalogo-default>
+  <app-catalogo-search *ngIf="value" [search_value]="value"></app-catalogo-search>
+</div>
+
+<app-footer></app-footer>
