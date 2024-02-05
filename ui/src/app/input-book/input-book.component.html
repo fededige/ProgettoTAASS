@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-sm">
             <div class="form-group">
-              <label for="autore">TITOLO</label>
-              <input type="text" class="form-control" id="titolo">
+              <label for="autore" >TITOLO</label>
+              <input type="text" class="form-control" id="titolo" name="titolo" #titolo value="{{ book.title }}" required>
             </div>
             </div>
         </div>
@@ -20,39 +20,116 @@
             <div class="col-sm">
             <div class="form-group">
               <label for="autore">AUTORE</label>
-              <input type="text" class="form-control" id="autore">
+              <input type="text" class="form-control" id="autore" name="autore" #autore value="{{ book.author }}">
             </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
-            <div class="form-group">
-              <label for="anno-pubblicazione">ANNO PUBBLICAZIONE</label>
-              <input type="text" class="form-control" id="anno-pubblicazione">
-            </div>
+                <!--
+                <div class="form-group">
+                    <label for="annoPubblicazione">ANNO PUBBLICAZIONE</label>
+                    <input class="form-control" id="annoPubblicazione" matInput [matDatepicker]="releasedAtPicker" #annoPubblicazione name="annoPubblicazione" [(ngModel)]="publishedDate">
+                    <mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #releasedAtPicker ></mat-datepicker>
+                </div>
+                -->
+                <div class="form-group"><label for="annoPubblicazione">ANNO PUBBLICAZIONE</label>
+                    <mat-form-field class="form-control">
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" id="annoPubblicazione" #annoPubblicazione name="annoPubblicazione" [(ngModel)]="publishedDate">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
             <div class="form-group">
               <label for="genere">GENERE</label>
-              <input type="text" class="form-control" id="genere">
+              <select id="genere" class="form-control" name="genere" #genere>
+                <option selected>Seleziona...</option>
+                <option> AZIONE_E_NARRATIVA_AVVENTURA </option>
+                <option> NARRATIVA_CLASSICA </option>
+                <option> NARRATIVA_CONTEMPORANEA </option>
+                <option> NARRATIVA_DISTOPICA </option>
+                <option> FANTASCIENZA </option>
+                <option> ROMANZO_GRAFICO </option>
+                <option> NARRATIVA_STORICA </option>
+                <option> FANTASCIENZA_DELL_ORRORE </option>
+                <option> NARRATIVA_LGBTQ </option>
+                <option> FINZIONE_LETTERARIA </option>
+                <option> FANTASCIENZA_MISTERIOSA </option>
+                <option> ROMANZO </option>
+                <option> NARRATIVA_SATIRICA </option>
+                <option> STORIA_BREVE </option>
+                <option> FANTASCIENZA_THRILLER </option>
+                <option> FANTASCIENZA_UTOPICA </option>
+                <option> NARRATIVA_OCCIDENTALE </option>
+                <option> NARRATIVA_FEMMINILE </option>
+                <option> GIOVANE_ADULTO </option>
+                <option> SAGGISTICA </option>
+                <option> ARTE_E_FOTOGRAFIA </option>
+                <option> BIOGRAFIA </option>
+                <option> LIBRI_DI_CUCINA </option>
+                <option> SAGGISTICA_STORICA </option>
+                <option> HOW_TO_AND_DIY </option>
+                <option> UMORISMO </option>
+                <option> MEMORIA_E_AUTOBIOGRAFIA </option>
+                <option> GENITORIALITÀ </option>
+                <option> FILOSOFIA </option>
+                <option> RELIGIONE_E_SPIRITUALITÀ </option>
+                <option> SELF_HELP </option>
+                <option> VIAGGIO </option>
+                <option> TRUE_CRIME </option>
+              </select>
             </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm">
             <div class="form-group">
-                <label for="durata-prestito">DURATA PRESTITO</label>
-                <select id="durata-prestito" class="form-control">
+                <label for="durataPrestito">DURATA PRESTITO</label>
+                <select id="durataPrestito" class="form-control" name="durataPrestito" #durataPrestito>
                   <option selected>Seleziona...</option>
-                  <option>15 giorni</option>
-                  <option>30 giorni</option>
-                  <option>45 giorni</option>
-                  <option>60 giorni</option>
+                  <option value="QUINDICI" >15 giorni</option>
+                  <option value="TRENTA" >30 giorni</option>
+                  <option value="QUARANTACINQUE" >45 giorni</option>
+                  <option value="SESSANTA">60 giorni</option>
                 </select>
             </div>
             </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="condizioni">CONDIZIONI DEL LIBRO</label>
+              <select id="condizioni" class="form-control" name="condizioni" #condizioni>
+                <option selected>Seleziona...</option>
+                <option>ACCETTABILE</option>
+                <option>OTTIMA</option>
+                <option>ECCELLENTE</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="casaEditrice">CASA EDITRICE</label>
+              <input type="text" class="form-control" id="casaEditrice" name="casaEditrice" #casaEditrice>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <div class="form-group">
+              <label for="plotArea" class="form-label">TRAMA</label>
+              <textarea class="form-control" id="plotArea" rows="3" name="plotArea" #plotArea value="{{ book.plot }}"></textarea>
+            </div>
+          </div>
         </div>
     </form>
 
@@ -64,16 +141,13 @@
                 <div class="md:flex">
                     <div class="w-full p-3">
                         <div class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-
                           <div class="absolute">
-
-                            <div class="flex flex-col items-center">
-                              <i class="fa fa-folder-open fa-4x text-blue-700"></i>
-                            <span class="block text-gray-400 font-normal">Attach you files here</span>
-                            </div>
+                              <div class="flex flex-col items-center">
+                                  <i class="fa fa-folder-open fa-4x text-blue-700"></i>
+                              <span class="block text-gray-400 font-normal">Attach you files here</span>
+                              </div>
                           </div>
-
-                          <input type="file" class="h-full w-full opacity-0" name="">
+                          <input type="file" accept="image/*" class="h-full w-full opacity-0" id="cover" name="cover" #cover (change)="processFile(cover)">
                         </div>
                     </div>
                 </div>
@@ -81,14 +155,56 @@
         </div>
         <div class="row m-2">
             <div class="col-sm align-self-center">
-                <button  type="button" class="btn btn_scansione form-control btn-lg btn-block" style="color : #4361EE">SCANSIONA IL CODICE A BARRE</button>
-
+                <button  type="button" class="btn btn_scansione form-control btn-lg btn-block" style="color : #4361EE" data-bs-toggle="modal" data-bs-target="#staticBackdrop">INSERISCI DATI TRAMITE CODICE ISBN</button>
+                <!-- Modal -->
+                <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h2 class="modal-title" id="staticBackdropLabel" style="color: black;">INSERISCI ISBN</h2>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="books = []; codiceISBN.value = '';"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <div class="col-6">
+                                      <img src="assets/immagineISBN.png" alt="ISBN" style="height: auto; width: 90%"/>
+                                  </div>
+                                  <div class="col-6">
+                                      <p style="color: black; text-transform: none;">Inserisci l'ISBN del libro che vuoi inserire per permettere di recuperare tutte le informazioni necessarie in maniera automatica.</p>
+                                  </div>
+                              </div>
+                              <form class="row">
+                                  <div class="col-8">
+                                      <input type="text" class="form-control mt-4 mb-2" placeholder="Codice ISBN..." id="codiceISBN" name="codiceISBN" #codiceISBN required >
+                                  </div>
+                                  <div class="col-4">
+                                      <button type="button" style="background-color: green" class="btn btn-success form-control mt-4" (click)="getBookInfos(codiceISBN.value)">Cerca</button>
+                                  </div>
+                              </form>
+                              <div class="row">
+                                  <div class="col">
+                                      <table class="table table-hover" >
+                                          <tbody *ngFor="let book of books">
+                                              <tr>
+                                                  <td><p>{{ book["title"] }} di {{ book["author"] }} del {{ book["publishedDate"] }}</p></td>
+                                                  <td> <button class="btn btn-primary" id="btnSelectBook" data-bs-dismiss="modal" (click)="selectBook(book); codiceISBN.value = ''">Seleziona</button> </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="books = []; codiceISBN.value = '';" >Chiudi</button>
+                          </div>
+                      </div>
+                  </div>
+                </div>
             </div>
         </div>
-
         <div class="row m-2">
             <div class="col-sm align-self-end">
-                <button  type="button" class="btn btn_ins-lib form-control btn-lg btn-block">
+                <button  type="button" class="btn btn_ins-lib form-control btn-lg btn-block" (click)="insertBook(titolo.value, autore.value, annoPubblicazione.value, genere.value, durataPrestito.value, condizioni.value, casaEditrice.value, plotArea.value)">
                     <mat-icon>book</mat-icon>
                     INSERISCI LIBRO
                   </button>

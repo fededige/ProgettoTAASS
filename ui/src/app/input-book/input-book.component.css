@@ -8,27 +8,26 @@
 .col-sm{
     color: #407BFF;
     font-size: 1rem;
-     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
 }
 
-  button.btn_scansione{
-    border: white;
-    background-color: white;
-  }
+button.btn_scansione{
+  border: white;
+  background-color: white;
+}
 
-  button.btn_ins-lib{
-    border: white;
-    background-color: #4361EE;
-    color: white;
-  }
+button.btn_ins-lib{
+  border: white;
+  background-color: #4361EE;
+  color: white;
+}
 
-  .form-group{
-    color:#407BFF;
-    margin: 7px;
+.form-group{
+  color:#407BFF;
+  margin: 7px;
 }
 .form-control{
     background-color: #95b3f1;
 }
-  
-  
+

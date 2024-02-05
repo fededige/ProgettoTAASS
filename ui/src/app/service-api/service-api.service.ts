@@ -6,27 +6,40 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 export class ServiceApiService {
 
   constructor(private http: HttpClient) { }
-  private urlCatalog = 'https://localhost:8080/catalog';
+  private urlCatalog = 'http://localhost:8080/catalog';
   private urlUser ='https://localhost:8080/user';
 
-  insertBook(){
-    const headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    const params = new HttpParams({
-      fromObject: { title : 'name',
-        author : 'email',
-        publishingDate : 'role',
-        genre : 'Inactive',
-        plot : 1234567890,
-        // owner: ,
-        // condition: ,
-        // publisher: ,
-        // loanDuration: ,
-        // timesRead: ,
-        // timesReadThisMonth: ,
-        // available: ,
-      }
-    });
-    return this.http.post(this.urlCatalog + '/insert', params, {headers});
+  insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
+             durataPrestito: string, condizioni: string, casaEditrice: string, plot: string, cover: any){
+    let dateFields = annoPubblicazione.split('/');
+    annoPubblicazione = dateFields[2] + "-" + dateFields[0] +  "-" + dateFields[1];
+    let book = {
+      title : titolo,
+      author : autore,
+      publishingDate : annoPubblicazione,
+      genre : genere,
+      plot : plot,
+      owner: {
+        username: 'test23',
+        email: 'test23@example.com'
+      },
+      condition: condizioni,
+      publisher: casaEditrice,
+      loanDuration: durataPrestito,
+      cover: cover,
+      timesRead: 0,
+      timesReadThisMonth: 0,
+      available: true
+    }
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods':'POST,GET,PUT,DELETE'});
+    console.log(JSON.stringify(book));
+    return this.http.post(this.urlCatalog + '/insert', book, {headers});
+  }
+
+
+  isbnAPI(isbn: string){
+      return this.http.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn);
   }
 }
 
