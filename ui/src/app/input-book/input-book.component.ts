@@ -39,6 +39,12 @@ export class InputBookComponent {
 
   insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
              durataPrestito: string, condizioni: string, casaEditrice: string, plot: string) {
+
+      this.apiService.getUsers()
+          .subscribe( (data) => {
+          console.log(data);
+      });
+
         if(titolo == null || autore == null || annoPubblicazione == null ||
             durataPrestito == null || condizioni == null || casaEditrice == null){
             alert("titolo, autore, annoPubblicazione, durataPrestito, condizioni, casaEditrice sono campi required");

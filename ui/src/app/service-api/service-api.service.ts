@@ -20,8 +20,8 @@ export class ServiceApiService {
       genre : genere,
       plot : plot,
       owner: {
-        username: 'test23',
-        email: 'test23@example.com'
+        username: 'prova',
+        email: 'prova@example.com'
       },
       condition: condizioni,
       publisher: casaEditrice,
@@ -31,15 +31,20 @@ export class ServiceApiService {
       timesReadThisMonth: 0,
       available: true
     }
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods':'POST,GET,PUT,DELETE'});
-    console.log(JSON.stringify(book));
-    return this.http.post(this.urlCatalog + '/insert', book, {headers});
+    console.log(book);
+    let bookJSON = JSON.stringify(book);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    console.log(bookJSON);
+    return this.http.post(this.urlCatalog + '/insert', bookJSON, {headers});
   }
 
 
   isbnAPI(isbn: string){
       return this.http.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn);
+  }
+
+  getUsers(){
+    return this.http.get('http://localhost:8080/user/');
   }
 }
 
