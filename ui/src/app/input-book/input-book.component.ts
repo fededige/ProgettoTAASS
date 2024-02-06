@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ServiceApiService } from "../service-api/service-api.service";
+import { Router } from "@angular/router";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -10,7 +12,7 @@ class ImageSnippet {
     styleUrl: './input-book.component.css' ,
 })
 export class InputBookComponent {
-    constructor(private apiService: ServiceApiService) { }
+    constructor(private apiService: ServiceApiService, private router: Router) { }
 
     public books: any[] = [];
 
@@ -29,24 +31,16 @@ export class InputBookComponent {
         "60 giorni": "SESSANTA",
     }
 
-    public publishedDate?: Date;
-
     public selectedFile?: ImageSnippet;
 
-    ngOnInit() {
+    public hasCover?: boolean = false;
 
-    }
+    public coverToShow?: string;
 
   insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
              durataPrestito: string, condizioni: string, casaEditrice: string, plot: string) {
-
-      this.apiService.getUsers()
-          .subscribe( (data) => {
-          console.log(data);
-      });
-
-        if(titolo == null || autore == null || annoPubblicazione == null ||
-            durataPrestito == null || condizioni == null || casaEditrice == null){
+        if(titolo == "" || autore == "" || annoPubblicazione == "" ||
+            durataPrestito == "Seleziona..." || condizioni == "Seleziona..." || casaEditrice == ""){
             alert("titolo, autore, annoPubblicazione, durataPrestito, condizioni, casaEditrice sono campi required");
             return;
         }
@@ -58,9 +52,15 @@ export class InputBookComponent {
             cover = this.selectedFile["src"];
         }
         this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, this.durataDict[durataPrestito], condizioni, casaEditrice, plot, cover)
-            .subscribe( (data) => {
-              console.log(data);
-        });
+            .subscribe({
+                next: (data) => {
+                    if(data.status == 200)
+                        this.router.navigate(['/success'])
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+            });
     }
 
     getBookInfos(isbn: string) {
@@ -69,11 +69,17 @@ export class InputBookComponent {
           this.books = [];
           const items = data["items"];
           for (let i  = 0; i < items.length; i++){
+            let bookCover: string;
+            if(items[i]["volumeInfo"].hasOwnProperty("imageLinks")){
+              bookCover = items[i]["volumeInfo"]["imageLinks"]["thumbnail"];
+            } else {
+              bookCover = ""
+            }
             this.books?.push({
               title : items[i]["volumeInfo"]["title"],
               author : items[i]["volumeInfo"]["authors"][0],
               publishedDate : items[i]["volumeInfo"]["publishedDate"],
-              cover: items[i]["volumeInfo"].hasOwnProperty("imageLinks")  ? items[i]["volumeInfo"]["imageLinks"]["thumbnail"] : "",
+              cover: bookCover,
               plot : items[i]["volumeInfo"]["description"],
             });
           }
@@ -85,12 +91,20 @@ export class InputBookComponent {
     }
     selectBook(selectedBook: any) {
         this.books = [];
+        if(selectedBook.cover != ""){
+            this.hasCover = true;
+            this.coverToShow = selectedBook.cover;
+        }
+        else {
+            this.coverToShow = "";
+            this.hasCover = false;
+        }
         if(!selectedBook.publishedDate.includes("-")){
-            let temp = "01/01/" + selectedBook.publishedDate;
-            this.publishedDate = new Date(temp);
+            let temp = selectedBook.publishedDate + "-01-01";
+            this.book.publishedDate = temp;
         }
         else{
-          this.publishedDate = new Date(selectedBook.publishedDate);
+          this.book.publishedDate = selectedBook.publishedDate;
         }
         this.book.title = selectedBook.title;
         this.book.author = selectedBook.author;
@@ -104,6 +118,8 @@ export class InputBookComponent {
         reader.addEventListener('load', (event: any) => {
             this.selectedFile = new ImageSnippet(event.target.result, file);
             console.log(this.selectedFile);
+            this.coverToShow = this.selectedFile["src"];
+            this.hasCover = true;
         });
         reader.readAsDataURL(file);
     }

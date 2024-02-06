@@ -6,6 +6,7 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { AnnunciComponent } from './annunci/annunci.component';
 import { LoginComponent } from './login/login.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { SuccessPageComponent } from "./success-page/success-page.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'inserisci-libro', component: InputBookComponent },
   { path: 'annunci', component:  AnnunciComponent},
   { path: 'login', component:  LoginComponent },
+  { path: 'success', component: SuccessPageComponent },
 ];
 
 @NgModule({

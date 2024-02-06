@@ -26,23 +26,10 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                <!--
                 <div class="form-group">
                     <label for="annoPubblicazione">ANNO PUBBLICAZIONE</label>
-                    <input class="form-control" id="annoPubblicazione" matInput [matDatepicker]="releasedAtPicker" #annoPubblicazione name="annoPubblicazione" [(ngModel)]="publishedDate">
-                    <mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
-                    <mat-datepicker #releasedAtPicker ></mat-datepicker>
+                    <input type="date" class="form-control" placeholder="Inserisci la data di pubblicazione" id="annoPubblicazione" name="annoPubblicazione" #annoPubblicazione [(ngModel)]="book.publishedDate"/>
                 </div>
-                -->
-                <div class="form-group"><label for="annoPubblicazione">ANNO PUBBLICAZIONE</label>
-                    <mat-form-field class="form-control">
-                        <mat-label>Choose a date</mat-label>
-                        <input matInput [matDatepicker]="picker" id="annoPubblicazione" #annoPubblicazione name="annoPubblicazione" [(ngModel)]="publishedDate">
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                </div>
-
             </div>
         </div>
         <div class="row">
@@ -140,14 +127,17 @@
             <div class="max-w-md mx-auto rounded-lg overflow-hidden md:max-w-xl">
                 <div class="md:flex">
                     <div class="w-full p-3">
-                        <div class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
-                          <div class="absolute">
-                              <div class="flex flex-col items-center">
-                                  <i class="fa fa-folder-open fa-4x text-blue-700"></i>
-                              <span class="block text-gray-400 font-normal">Attach you files here</span>
-                              </div>
-                          </div>
-                          <input type="file" accept="image/*" class="h-full w-full opacity-0" id="cover" name="cover" #cover (change)="processFile(cover)">
+                        <div [hidden]="hasCover" class="relative border-dotted h-48 rounded-lg border-dashed border-2 border-blue-700 bg-gray-100 flex justify-center items-center">
+                            <div class="absolute">
+                                  <div class="flex flex-col items-center">
+                                      <i class="fa fa-folder-open fa-4x text-blue-700"></i>
+                                      <span class="text-gray-400 font-normal">Attach you files here</span>
+                                  </div>
+                            </div>
+                            <input type="file" accept="image/*" class="h-full w-full opacity-0" id="cover" name="cover" #cover (change)="processFile(cover)">
+                        </div>
+                        <div [hidden]="!hasCover" class="flex justify-center items-center">
+                            <img src="{{coverToShow}}" style="height: 300px; width: auto">
                         </div>
                     </div>
                 </div>

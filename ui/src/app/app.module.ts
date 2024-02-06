@@ -29,6 +29,7 @@ import { CatalogoDefaultComponent } from './catalogo-default/catalogo-default.co
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import {FormsModule} from "@angular/forms";
+import { SuccessPageComponent } from './success-page/success-page.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {FormsModule} from "@angular/forms";
     BookDetailsComponent,
     CatalogoSearchComponent,
     CatalogoDefaultComponent,
+    SuccessPageComponent,
   ],
   imports: [
     CommonModule,
