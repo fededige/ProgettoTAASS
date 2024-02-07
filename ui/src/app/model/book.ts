@@ -1,8 +1,7 @@
 export class book {
-  id?: number
-  title?: string
-  author?: string
-  editions?: number
-  cover?: string
-  constructor() { }
+    id?: number
+    title?: string
+    author?: string
+    cover?: string
+    constructor() { }
 }

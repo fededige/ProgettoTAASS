@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ServiceApiService } from "../service-api/service-api.service";
+import { BookApiService } from "../service-api/book-api.service";
 import { Router } from "@angular/router";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -12,7 +11,7 @@ class ImageSnippet {
     styleUrl: './input-book.component.css' ,
 })
 export class InputBookComponent {
-    constructor(private apiService: ServiceApiService, private router: Router) { }
+    constructor(private apiService: BookApiService, private router: Router) { }
 
     public books: any[] = [];
 
@@ -24,43 +23,37 @@ export class InputBookComponent {
       "cover": ""
     }
 
-    public durataDict: any = {
-        "15 giorni": "QUINDICI",
-        "30 giorni": "TRENTA",
-        "45 giorni": "QUARANTACINQUE",
-        "60 giorni": "SESSANTA",
-    }
-
     public selectedFile?: ImageSnippet;
 
     public hasCover?: boolean = false;
 
     public coverToShow?: string;
 
-  insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
-             durataPrestito: string, condizioni: string, casaEditrice: string, plot: string) {
-        if(titolo == "" || autore == "" || annoPubblicazione == "" ||
-            durataPrestito == "Seleziona..." || condizioni == "Seleziona..." || casaEditrice == ""){
-            alert("titolo, autore, annoPubblicazione, durataPrestito, condizioni, casaEditrice sono campi required");
-            return;
-        }
-        let cover:string = "";
-        if(this.book.cover != ""){
-            cover = this.book.cover;
-        }
-        else if(this.selectedFile != null){
-            cover = this.selectedFile["src"];
-        }
-        this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, this.durataDict[durataPrestito], condizioni, casaEditrice, plot, cover)
-            .subscribe({
-                next: (data) => {
-                    if(data.status == 200)
-                        this.router.navigate(['/success'])
-                },
-                error: (err) => {
-                    console.log(err)
-                }
-            });
+    insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
+               durataPrestito: string, condizioni: string, casaEditrice: string, plot: string) {
+          if(titolo == "" || autore == "" || annoPubblicazione == "" ||
+              durataPrestito == "Seleziona..." || condizioni == "Seleziona..." || casaEditrice == ""){
+              alert("titolo, autore, annoPubblicazione, durataPrestito, condizioni, casaEditrice sono campi required");
+              return;
+          }
+          let cover:string = "";
+          if(this.book.cover != ""){
+              cover = this.book.cover;
+          }
+          else if(this.selectedFile != null){
+              cover = this.selectedFile["src"];
+          }
+
+        this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover)
+                .subscribe({
+                    next: (data) => {
+                        if(data.status == 200)
+                            this.router.navigate(['/success'])
+                    },
+                    error: (err) => {
+                        console.log(err)
+                    }
+                });
     }
 
     getBookInfos(isbn: string) {
