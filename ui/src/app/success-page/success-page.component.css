@@ -1,0 +1,22 @@
+#imgLibroBackground {
+    width: auto;
+    height: 50%;
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+}
+
+#imgSuccess {
+    height:8rem;
+    width:auto
+}
+
+@media (max-width: 992px) {
+    h3 {
+        font-size: 8pt !important;
+    }
+    #imgSuccess {
+        height: 6rem;
+        width: auto;
+    }
+}

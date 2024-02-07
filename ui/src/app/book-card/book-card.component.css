@@ -1,5 +1,31 @@
+.textBlock {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#bookCover {
+    height: 350px;
+}
+
+@media (max-width: 1200px) {
+      #bookCover {
+        height: 250px;
+      }
+}
+
+@media (max-width: 992px) {
+    #bookCover {
+        height: 175px;
+    }
+}
+
 @media (max-width: 575px) {
     #card-container{
-        width: 70%;
+        width: 55%;
+    }
+    #bookCover {
+        height: auto;
     }
 }

@@ -1,3 +1,26 @@
+#backgroundGradient {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    height: 80%;
+    width: auto;
+}
+
+@media (max-width: 992px) {
+    #backgroundGradient {
+        height: 60%;
+        width: auto;
+    }
+}
 
 
-
+@media (max-width: 768px) {
+   #backgroundGradient {
+      height: 50%;
+      width: auto;
+   }
+    .btn {
+        width: 80%;
+    }
+}
