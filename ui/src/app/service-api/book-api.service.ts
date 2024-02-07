@@ -3,11 +3,10 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceApiService {
+export class BookApiService {
 
   constructor(private http: HttpClient) { }
   private urlCatalog = 'http://localhost:8080/catalog';
-  private urlUser ='https://localhost:8080/user';
 
   insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
              durataPrestito: string, condizioni: string, casaEditrice: string, plot: string, cover: any){
@@ -41,8 +40,10 @@ export class ServiceApiService {
       return this.http.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn);
   }
 
-  getUsers(){
-    return this.http.get('http://localhost:8080/user/');
-  }
+  // getUsers(){
+  //   return this.http.get('http://localhost:8080/user/');
+  // }
+
+
 }
 
