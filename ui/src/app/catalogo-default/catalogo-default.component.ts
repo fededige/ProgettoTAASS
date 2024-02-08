@@ -22,6 +22,7 @@ export class CatalogoDefaultComponent implements OnInit {
 
     ngOnInit(){
         this.apiService.getBestsellers().subscribe((data: any) => {
+            console.log("getBestsellers");
             console.log(data);
             for(let i = 0; i < data.length; i++){
                 let dataJSON = JSON.parse(data[i]);

@@ -17,12 +17,12 @@ export class SearchbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.shareDataService.searchData$.subscribe(res => this.searchResult = res)
+        this.shareDataService.searchData$.subscribe(res => this.searchResult = res);
     }
 
     search() {
-        this.searchResult = [];
-        this.shareDataService.searchDataObservable(this.searchResult);
+        // this.searchResult = [];
+        // this.shareDataService.searchDataObservable(this.searchResult);
         this.searchValue.emit(this.search_field);
         if(this.search_field != null){
             this.apiService.searchBooksByTitleAndAuthor(this.search_field)

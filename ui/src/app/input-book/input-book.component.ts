@@ -57,30 +57,34 @@ export class InputBookComponent {
     }
 
     getBookInfos(isbn: string) {
-      if(isbn != ""){
-        this.apiService.isbnAPI(isbn).subscribe((data: any) => {
-          this.books = [];
-          const items = data["items"];
-          for (let i  = 0; i < items.length; i++){
-            let bookCover: string;
-            if(items[i]["volumeInfo"].hasOwnProperty("imageLinks")){
-              bookCover = items[i]["volumeInfo"]["imageLinks"]["thumbnail"];
-            } else {
-              bookCover = ""
-            }
-            this.books?.push({
-              title : items[i]["volumeInfo"]["title"],
-              author : items[i]["volumeInfo"]["authors"][0],
-              publishedDate : items[i]["volumeInfo"]["publishedDate"],
-              cover: bookCover,
-              plot : items[i]["volumeInfo"]["description"],
+        if(isbn != ""){
+            this.apiService.isbnAPI(isbn).subscribe((data: any) => {
+                this.books = [];
+                const items = data["items"];
+                for (let i  = 0; i < items.length; i++){
+                    let bookCover: string;
+                    if(items[i]["volumeInfo"].hasOwnProperty("imageLinks")){
+                        bookCover = items[i]["volumeInfo"]["imageLinks"]["thumbnail"];
+                    } else {
+                        bookCover = ""
+                    }
+                    this.books?.push({
+                        title : items[i]["volumeInfo"].hasOwnProperty("title") ?
+                            items[i]["volumeInfo"]["title"] : "",
+                        author : items[i]["volumeInfo"].hasOwnProperty("authors") ?
+                            items[i]["volumeInfo"]["authors"][0] : "",
+                        publishedDate : items[i]["volumeInfo"].hasOwnProperty("publishedDate") ?
+                            items[i]["volumeInfo"]["publishedDate"] : "",
+                        cover: bookCover,
+                        plot : items[i]["volumeInfo"].hasOwnProperty("description") ?
+                            items[i]["volumeInfo"]["description"] : "",
+                    });
+                }
             });
-          }
-        });
-      }
-      else {
-        alert("ISBN non inserito");
-      }
+        }
+        else {
+            alert("ISBN non inserito");
+        }
     }
     selectBook(selectedBook: any) {
         this.books = [];

@@ -9,13 +9,12 @@ import {ShareDataService} from "../service-api/share-data.service";
 })
 export class BookDetailsComponent implements OnInit{
     title: any
-    book_details!: any
     bookClicked?: any = {
         "title": "",
         "author": "",
         "publishedDate": "",
         "genre": "",
-        "duration": "",
+        "loanDuration": "",
         "condition": "",
         "publisher": "",
         "plot": "",
@@ -24,12 +23,32 @@ export class BookDetailsComponent implements OnInit{
     constructor(private shareDataService: ShareDataService, private route: ActivatedRoute) {}
     star = [1, 2, 3, 4, 5];
     ngOnInit(): void {
-        this.shareDataService.bookDetails$.subscribe((data: string) => {
+
+      this.shareDataService.bookDetails$.subscribe((data: string) => {
             this.bookClicked = data;
+            console.log("bookClicked");
+            this.bookClicked.loanDuration = this.transalateDuration(this.bookClicked.loanDuration);
             console.log(this.bookClicked);
         });
 
         this.title = this.route.snapshot.paramMap.get('title')
+    }
+
+    transalateDuration(loanDuration: string) {
+        let res:string = "";
+        switch (loanDuration) {
+            case "QUINDICI": res = "15";
+                break;
+            case "TRENTA": res = "30";
+                break;
+            case "QUARANTACINQUE": res = "45";
+                break;
+            case "SESSANTA": res = "60";
+                break;
+            default: res = loanDuration;
+        }
+        console.log(loanDuration + "" + res);
+        return res;
     }
 
   // simulazione chiamata al db

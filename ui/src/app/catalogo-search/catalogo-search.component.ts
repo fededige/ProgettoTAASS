@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ShareDataService } from "../service-api/share-data.service";
-import { book } from '../model/book';
 
 @Component({
     selector: 'app-catalogo-search',
@@ -16,14 +15,15 @@ export class CatalogoSearchComponent implements OnInit {
     ngOnInit(): void {
         this.shareDataService.searchData$.subscribe(data => {
             this.searchResult = data;
+            this.searchBooks = [];
             if(this.searchResult[0] != ""){
                 for(let i = 0; i < this.searchResult.length; i++){
-                  let book = JSON.parse(data[i]);
-                  if(book["cover"] == null || book["cover"] == ""){
-                    book["cover"] = "../../assets/book-default.jpg";
+                    let book = JSON.parse(data[i]);
+                    if(book["cover"] == null || book["cover"] == ""){
+                      book["cover"] = "../../assets/book-default.jpg";
+                    }
+                    this.searchBooks.push(book);
                   }
-                  this.searchBooks.push(book);
-                }
             }
         });
     }
