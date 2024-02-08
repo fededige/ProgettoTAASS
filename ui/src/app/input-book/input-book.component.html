@@ -176,7 +176,7 @@
                                       <table class="table table-hover" >
                                           <tbody *ngFor="let book of books">
                                               <tr>
-                                                  <td><p>{{ book["title"] }} di {{ book["author"] }} del {{ book["publishedDate"] }}</p></td>
+                                                  <td><p style="text-transform: none;">{{ book["title"] }} {{ book["author"] != "" ? "di " + book["author"] : "" }} {{ book["publishedDate"] != "" ? "del " + book["publishedDate"] : "" }}</p></td>
                                                   <td> <button class="btn btn-primary" id="btnSelectBook" data-bs-dismiss="modal" (click)="selectBook(book); codiceISBN.value = ''">Seleziona</button> </td>
                                               </tr>
                                           </tbody>

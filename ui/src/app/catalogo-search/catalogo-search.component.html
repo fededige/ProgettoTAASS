@@ -1,8 +1,13 @@
 <p class="font-weight-light text-muted">Risultati per "{{ search_value }}" </p>
-<div class="container form-control section-result">
+<div class="container form-control section-result mb-4">
     <div class="row m-1">
-        <div *ngFor="let book of searchBooks; index as i"  class="d-block col-md-3 col-sm-4 " [ngClass]="{'d-none d-sm-none d-md-inline': i === searchBooks.length - 1}">
+        <div [hidden]="searchBooks.length != 0">
+            <p><i>Nessun risultato trovato...</i></p>
+        </div>
+        <div *ngFor="let book of searchBooks; index as i"  class="d-block col-md-3 col-sm-4 ">
             <app-book-card class="" [book]='book' [position]='-1'></app-book-card>
         </div>
     </div>
 </div>
+
+<!--[ngClass]="{'d-none d-sm-none d-md-inline': i === searchBooks.length - 1}"-->

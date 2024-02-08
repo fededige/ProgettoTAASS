@@ -137,10 +137,12 @@
 @media (max-width: 576px) {
   #book-owner{
     font-size: 1.2em !important;
+
   }
   #book-owner svg{
     width: 16px;
     height: 16px;
+
   }
   .ratings i{
     font-size: 16px;
