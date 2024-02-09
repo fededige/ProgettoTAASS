@@ -16,11 +16,11 @@ export class InputBookComponent {
     public books: any[] = [];
 
     public book = {
-      "title": "",
-      "author": "",
-      "publishedDate": "",
-      "plot": "",
-      "cover": ""
+        "title": "",
+        "author": "",
+        "publishedDate": "",
+        "plot": "",
+        "cover": ""
     }
 
     public selectedFile?: ImageSnippet;
@@ -31,29 +31,29 @@ export class InputBookComponent {
 
     insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
                durataPrestito: string, condizioni: string, casaEditrice: string, plot: string) {
-          if(titolo == "" || autore == "" || annoPubblicazione == "" ||
-              durataPrestito == "Seleziona..." || condizioni == "Seleziona..." || casaEditrice == ""){
-              alert("titolo, autore, annoPubblicazione, durataPrestito, condizioni, casaEditrice sono campi required");
-              return;
-          }
-          let cover:string = "";
-          if(this.book.cover != ""){
-              cover = this.book.cover;
-          }
-          else if(this.selectedFile != null){
-              cover = this.selectedFile["src"];
-          }
+        if(titolo == "" || autore == "" || annoPubblicazione == "" ||
+            durataPrestito == "Seleziona..." || condizioni == "Seleziona..." || casaEditrice == ""){
+            alert("titolo, autore, annoPubblicazione, durataPrestito, condizioni, casaEditrice sono campi required");
+            return;
+        }
+        let cover:string = "";
+        if(this.book.cover != ""){
+            cover = this.book.cover;
+        }
+        else if(this.selectedFile != null){
+            cover = this.selectedFile["src"];
+        }
 
         this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover)
-                .subscribe({
-                    next: (data) => {
-                        if(data.status == 200)
-                            this.router.navigate(['/success'])
-                    },
-                    error: (err) => {
-                        console.log(err)
-                    }
-                });
+            .subscribe({
+                next: (data) => {
+                    if(data.status == 200)
+                        this.router.navigate(['/success'])
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+            });
     }
 
     getBookInfos(isbn: string) {

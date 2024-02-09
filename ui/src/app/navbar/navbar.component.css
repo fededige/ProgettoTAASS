@@ -1,5 +1,10 @@
 .active {
-  background-color: #407BFF !important;
-  color: white !important;
-  font-weight: bold;
+    background-color: #407BFF !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.btnProfilo {
+    display: block;
+    border-radius: 50%;
 }

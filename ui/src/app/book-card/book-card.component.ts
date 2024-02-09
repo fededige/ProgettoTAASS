@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ShareDataService} from "../service-api/share-data.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { ShareDataService } from "../service-api/share-data.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -25,16 +25,16 @@ export class BookCardComponent implements OnInit{
     constructor(private shareDataService: ShareDataService, private router: Router) { }
 
     ngOnInit() {
-      this.shareDataService.bookDetails$.subscribe((data: string) => {
-          this.bookClicked = data;
-      });
+        this.shareDataService.bookDetails$.subscribe((data: string) => {
+            this.bookClicked = data;
+        });
     }
 
     clickBook() {
-      this.bookClicked = this.book;
-      if(this.bookClicked.title != ""){
-          this.shareDataService.changeBookDetails(this.bookClicked);
-          this.router.navigate(['/catalogo/' + this.bookClicked.title]);
-      }
+        this.bookClicked = this.book;
+        if(this.bookClicked.title != ""){
+            this.shareDataService.bookDetailsObservable(this.bookClicked);
+            this.router.navigate(['/catalogo/' + this.bookClicked.title]);
+        }
     }
 }

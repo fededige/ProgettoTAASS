@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialAuthService, SocialUser, GoogleLoginProvider} from "@abacritt/angularx-social-login";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UserApiService } from "../service-api/user-api.service";
+import { ShareDataService } from "../service-api/share-data.service";
+import { user } from "../model/user";
 
 @Component({
     selector: 'app-login',
@@ -8,19 +10,29 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
     styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-    loginForm!: FormGroup;
-    socialUser!: SocialUser;
+    // loginForm!: FormGroup;
     isLoggedin?: boolean;
-    constructor(private formBuilder: FormBuilder, private socialAuthService: SocialAuthService) { }
+    loggedUser!: user;
+    constructor(private socialAuthService: SocialAuthService, private apiService: UserApiService, private shareDataService: ShareDataService) { }
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required],
+        this.shareDataService.isLogged$.subscribe((data: boolean) => {
+            this.isLoggedin = data;
         });
+
         this.socialAuthService.authState.subscribe((user) => {
-            this.socialUser = user;
-            this.isLoggedin = user != null;
-            console.log(this.socialUser);
+            console.log(user);
+            this.apiService.login(user.idToken, user.name, user.email)
+                .subscribe({
+                    next: (data) => {
+                        console.log("Authentication success");
+                        this.isLoggedin = user != null;
+                        this.loggedUser = data;
+                        this.shareDataService.userLoggedObservable(this.isLoggedin);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                });
         });
     }
     loginWithGoogle(): void {

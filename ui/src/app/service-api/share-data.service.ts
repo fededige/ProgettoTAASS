@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
-import {book} from "../model/book";
 
 @Injectable({
     providedIn: 'root'
@@ -12,11 +11,17 @@ export class ShareDataService {
     private bookDetails = new BehaviorSubject("");
     bookDetails$ = this.bookDetails.asObservable();
 
+    private isLogged = new BehaviorSubject(false);
+    isLogged$ = this.isLogged.asObservable();
+
     searchDataObservable(searchData: string[]) {
         this.searchData.next(searchData);
     }
-    changeBookDetails(bookDetails: string) {
+    bookDetailsObservable(bookDetails: string) {
       this.bookDetails.next(bookDetails);
     }
 
+    userLoggedObservable(userLogged: boolean) {
+        this.isLogged.next(userLogged);
+    }
 }
