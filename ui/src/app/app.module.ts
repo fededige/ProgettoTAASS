@@ -2,6 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common'
 import { HttpClientModule } from  '@angular/common/http';
+import { ReactiveFormsModule } from "@angular/forms";
+import {
+    SocialLoginModule,
+    SocialAuthServiceConfig,
+    GoogleLoginProvider,
+    GoogleSigninButtonModule
+} from "@abacritt/angularx-social-login";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,9 +70,25 @@ import { SuccessPageComponent } from './success-page/success-page.component';
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule,
   ],
-  providers: [],
+  providers: [
+      {
+          provide: 'SocialAuthServiceConfig',
+          useValue: {
+              autoLogin: false,
+              providers: [
+                  {
+                      id: GoogleLoginProvider.PROVIDER_ID,
+                      provider: new GoogleLoginProvider('257481680616-c0178tdoda5c1e6ihcrvqpuoqk7gq5sd.apps.googleusercontent.com'),
+                  },
+              ],
+          } as SocialAuthServiceConfig,
+      },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
