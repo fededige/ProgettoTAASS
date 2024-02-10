@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="{{ loggedUser.profileImg }}" alt="profile-image" class="img-fluid align-self-end" style="width: auto; height: 100px; border-radius: 50%"/>
+        </div>
+        <div class="col-6">
+            <strong class="img-fluid align-self-end">Bentornato {{ loggedUser.username }}</strong>
+            <p>{{ loggedUser.email }}</p>
+        </div>
+        <div class="col-2">
+            <div class="coins-container">
+                <img src="assets/coin.png" alt="coin" class="img-fluid ml-2" style="width: auto; height: 50px"/>
+                <strong style="color: blue; font-size: 18pt; display: inline"> {{ loggedUser.coins }} </strong>
+            </div>
+        </div>
+    </div>
+    <div class="row info p-2">
+        <!-- riga per i bottoni -->
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <button class="btn" (click)="libriLettiClick()" [ngClass]="{'active': selectedItem=='libriLetti'}"> Libri letti </button>
+            </div>
+            <div class="col-4">
+                <button class="btn" (click)="libriPrestatiClick()" [ngClass]="{'active': selectedItem=='libriPrestati'}"> I miei libri </button>
+            </div>
+            <div class="col-4">
+                <button class="btn" (click)="recensioniClick()" [ngClass]="{'active': selectedItem=='recensioni'}"> Le mie recensioni </button>
+            </div>
+        </div>
+
+        <!-- riga per la visualizzazione del contenuto -->
+        <div class="row" *ngIf="selectedItem=='libriLetti'">
+            <div class="col-12 m-1" *ngFor="let reservation of userBooksRead; index as i ">
+                <app-profile-books [reservation]="reservation"></app-profile-books>
+            </div>
+        </div>
+        <div class="row" *ngIf="selectedItem=='libriPrestati'">
+            <!--<div class="col m-1" *ngFor="let reservation of userBooksRead; index as i ">
+                <app-profile-books [reservation]="reservation"></app-profile-books>
+            </div>-->
+        </div>
+        <div class="row" *ngIf="selectedItem=='recensioni'">
+            <!--<div class="col m-1" *ngFor="let reservation of userBooksRead; index as i ">
+                <app-profile-books [reservation]="reservation"></app-profile-books>
+            </div>-->
+        </div>
+    </div>
+</div>

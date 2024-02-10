@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { SocialAuthService, SocialUser, GoogleLoginProvider} from "@abacritt/angularx-social-login";
 import { UserApiService } from "../service-api/user-api.service";
 import { ShareDataService } from "../service-api/share-data.service";
@@ -19,15 +19,22 @@ export class LoginComponent implements OnInit {
             this.isLoggedin = data;
         });
 
+        this.shareDataService.loggedUser$.subscribe((data: user) => {
+            this.loggedUser = data;
+        });
+
         this.socialAuthService.authState.subscribe((user) => {
             console.log(user);
             this.apiService.login(user.idToken, user.name, user.email)
                 .subscribe({
                     next: (data) => {
                         console.log("Authentication success");
+                        console.log(data);
                         this.isLoggedin = user != null;
                         this.loggedUser = data;
-                        this.shareDataService.userLoggedObservable(this.isLoggedin);
+                        this.loggedUser.profileImg = user.photoUrl;
+                        this.shareDataService.isLoggedObservable(this.isLoggedin);
+                        this.shareDataService.loggedUserObservable(this.loggedUser);
                     },
                     error: (err) => {
                         console.log(err);
@@ -42,3 +49,5 @@ export class LoginComponent implements OnInit {
         this.socialAuthService.signOut();
     }
 }
+
+

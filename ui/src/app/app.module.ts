@@ -7,7 +7,7 @@ import {
     SocialLoginModule,
     SocialAuthServiceConfig,
     GoogleLoginProvider,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
 } from "@abacritt/angularx-social-login";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,60 +35,64 @@ import { CatalogoSearchComponent } from './catalogo-search/catalogo-search.compo
 import { CatalogoDefaultComponent } from './catalogo-default/catalogo-default.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { SuccessPageComponent } from './success-page/success-page.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileBooksComponent } from './profile-books/profile-books.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    SearchbarComponent,
-    BookCardComponent,
-    InputBookComponent,
-    LandingPageComponent,
-    CatalogoComponent,
-    AnnunciComponent,
-    LoginComponent,
-    FooterComponent,
-    BookDetailsComponent,
-    CatalogoSearchComponent,
-    CatalogoDefaultComponent,
-    SuccessPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    NgbModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormFieldModule,
-    HttpClientModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SocialLoginModule,
-    GoogleSigninButtonModule,
-  ],
-  providers: [
-      {
-          provide: 'SocialAuthServiceConfig',
-          useValue: {
-              autoLogin: false,
-              providers: [
-                  {
-                      id: GoogleLoginProvider.PROVIDER_ID,
-                      provider: new GoogleLoginProvider('257481680616-c0178tdoda5c1e6ihcrvqpuoqk7gq5sd.apps.googleusercontent.com'),
-                  },
-              ],
-          } as SocialAuthServiceConfig,
-      },
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        SearchbarComponent,
+        BookCardComponent,
+        InputBookComponent,
+        LandingPageComponent,
+        CatalogoComponent,
+        AnnunciComponent,
+        LoginComponent,
+        FooterComponent,
+        BookDetailsComponent,
+        CatalogoSearchComponent,
+        CatalogoDefaultComponent,
+        SuccessPageComponent,
+        ProfileComponent,
+        ProfileBooksComponent,
+    ],
+    imports: [
+        CommonModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        NgbModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        HttpClientModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SocialLoginModule,
+        GoogleSigninButtonModule,
+    ],
+    providers: [
+        {
+            provide: 'SocialAuthServiceConfig',
+            useValue: {
+                autoLogin: false,
+                providers: [
+                    {
+                        id: GoogleLoginProvider.PROVIDER_ID,
+                        provider: new GoogleLoginProvider('257481680616-c0178tdoda5c1e6ihcrvqpuoqk7gq5sd.apps.googleusercontent.com'),
+                    },
+                ],
+            } as SocialAuthServiceConfig,
+        },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

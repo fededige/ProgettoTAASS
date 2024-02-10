@@ -83,9 +83,8 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-primary btn-prenota form-control mt-2">Prenota</button>
+        <button class="btn btn-primary btn-prenota form-control mt-2" *ngIf="isLoggedin" (click)="reserveBook()">Prenota</button>
       </div>
-
     </div>
   </div>
 </div>

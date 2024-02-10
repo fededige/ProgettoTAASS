@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {user} from "../model/user";
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,7 @@ export class BookApiService {
     private urlCatalog = 'http://localhost:8080/catalog';
 
     insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
-               durataPrestito: string, condizioni: string, casaEditrice: string, plot: string, cover: any){
+               durataPrestito: string, condizioni: string, casaEditrice: string, plot: string, cover: any, loggedUser: user){
         let book = {
             title : titolo,
             author : autore,
@@ -17,8 +18,8 @@ export class BookApiService {
             genre : genere,
             plot : plot,
             owner: {
-              username: 'prova',
-              email: 'prova@example.com'
+              username: loggedUser.username,
+              email: loggedUser.email,
             },
             condition: condizioni,
             publisher: casaEditrice,
@@ -35,9 +36,13 @@ export class BookApiService {
         return this.http.post(this.urlCatalog + '/insert', bookJSON, { headers: headers, observe: 'response' });  // observe: 'response' serve per far ritornare in data lo status della risposta
     }
 
-
     isbnAPI(isbn: string){
         return this.http.get('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn);
+    }
+
+    getBook(book: any) {
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post(this.urlCatalog + "/getBook", book, { headers: headers });
     }
 }
 

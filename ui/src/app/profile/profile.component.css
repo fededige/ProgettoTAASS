@@ -1,0 +1,15 @@
+.coins-container {
+    border-radius: 15px;
+  /*background: linear-gradient(180deg, #B721FF 0%, rgba(64, 123, 255, 0.9) 100%); */
+}
+
+.info {
+    background-color: #F1F1F1;
+    border-radius: 10px;
+}
+
+.active {
+    background-color: #407BFF !important;
+    color: white !important;
+    font-weight: bold;
+}

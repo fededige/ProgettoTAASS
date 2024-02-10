@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { BookApiService } from "../service-api/book-api.service";
 import { Router } from "@angular/router";
+import {ShareDataService} from "../service-api/share-data.service";
+import {user} from "../model/user";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -10,8 +12,19 @@ class ImageSnippet {
     templateUrl: './input-book.component.html',
     styleUrl: './input-book.component.css' ,
 })
-export class InputBookComponent {
-    constructor(private apiService: BookApiService, private router: Router) { }
+export class InputBookComponent implements OnInit{
+    private loggedUser?: user;
+    private isLogged?: boolean;
+    constructor(private apiService: BookApiService, private router: Router, private shareDataService: ShareDataService) { }
+
+    ngOnInit(): void {
+        this.shareDataService.isLogged$.subscribe((data: boolean) => {
+            this.isLogged = data;
+        });
+        this.shareDataService.loggedUser$.subscribe((data: user) => {
+          this.loggedUser = data;
+        });
+    }
 
     public books: any[] = [];
 
@@ -43,17 +56,18 @@ export class InputBookComponent {
         else if(this.selectedFile != null){
             cover = this.selectedFile["src"];
         }
-
-        this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover)
-            .subscribe({
-                next: (data) => {
-                    if(data.status == 200)
-                        this.router.navigate(['/success'])
-                },
-                error: (err) => {
-                    console.log(err)
-                }
-            });
+        if(this.isLogged && this.loggedUser != null){
+            this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover, this.loggedUser)
+                .subscribe({
+                    next: (data) => {
+                        if(data.status == 200)
+                            this.router.navigate(['/success'])
+                    },
+                    error: (err) => {
+                        console.log(err)
+                    }
+                });
+        }
     }
 
     getBookInfos(isbn: string) {

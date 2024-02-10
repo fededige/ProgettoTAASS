@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {ShareDataService} from "../service-api/share-data.service";
+import {user} from "../model/user";
+import {ReservationApiService} from "../service-api/reservation-api.service";
 
 @Component({
   selector: 'app-book-details',
@@ -20,17 +22,23 @@ export class BookDetailsComponent implements OnInit{
         "plot": "",
         "cover": ""
     };
-    constructor(private shareDataService: ShareDataService, private route: ActivatedRoute) {}
+    isLoggedin?: boolean;
+    loggedUser?: user;
+    constructor(private shareDataService: ShareDataService, private route: ActivatedRoute, private reservationApiService: ReservationApiService) {}
     star = [1, 2, 3, 4, 5];
     ngOnInit(): void {
-
-      this.shareDataService.bookDetails$.subscribe((data: string) => {
+        this.shareDataService.loggedUser$.subscribe((data: user) => {
+            this.loggedUser = data;
+        });
+        this.shareDataService.isLogged$.subscribe((data: boolean) => {
+            this.isLoggedin = data;
+        });
+        this.shareDataService.bookDetails$.subscribe((data: string) => {
             this.bookClicked = data;
             console.log("bookClicked");
             this.bookClicked.loanDuration = this.transalateDuration(this.bookClicked.loanDuration);
             console.log(this.bookClicked);
         });
-
         this.title = this.route.snapshot.paramMap.get('title')
     }
 
@@ -50,18 +58,21 @@ export class BookDetailsComponent implements OnInit{
         console.log(loanDuration + "" + res);
         return res;
     }
-
-  // simulazione chiamata al db
-  // this.book_details = {
-  //     "title": this.title,
-  //     "author": "George Orwell",
-  //     "cover": "https://th.bing.com/th/id/OIP.gX0ExEtzFf0AkuD2xmX2iAHaMF?rs=1&pid=ImgDetMain",
-  //     "owner": "Francesco",
-  //     "price": 4,
-  //     "plot": "‘ 1984 ‘ by George Orwell is a dystopian novel set in a totalitarian society led by the omnipresent Big Brother. The story follows Winston Smith, who works for the Ministry of Truth, altering historical records. Discontent with the regime, Winston begins a forbidden relationship with Julia.",
-  //     "condition": "bad",
-  //     "edition": "1984",
-  //     "restitution": 30,
-  //     "evaluation": 3.5
-  // }
+    reserveBook() {
+        if(this.isLoggedin){
+            if(this.loggedUser != null && this.bookClicked.title != ""){
+                console.log(new Date());
+                this.reservationApiService.reserveBook(new Date(), this.bookClicked, this.loggedUser).subscribe({
+                    next: (data) => {
+                        console.log("TEMP: reservation success");
+                        console.log(data);
+                    },
+                    error: (err) => {
+                        console.log(err)
+                        console.log("TEMP: reservation error");
+                    }
+                });
+            }
+        }
+    }
 }
