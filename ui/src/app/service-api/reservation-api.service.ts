@@ -12,7 +12,6 @@ import {reservationUser} from "../model/reservationUser";
 export class ReservationApiService {
     constructor(private http: HttpClient) { }
     private urlReservation = 'http://localhost:8080/reservation';
-    private tempUrl = "";
 
     reserveBook(date: Date, book: any, user: user){
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -26,17 +25,22 @@ export class ReservationApiService {
         reservation.book.publishingDate = book.publishingDate;
         reservation.book.available = book.available;
         reservation.book.owner = book.owner;
+        if( reservation.book.owner != null)
+            reservation.book.owner.coins = 0;
         reservation.ReservationUser.username = user.username;
         reservation.ReservationUser.email = user.email;
+        reservation.ReservationUser.coins = 0;
 
         let reservationJSON = JSON.stringify(reservation);
-        console.log("RESERVATIONJSON");
-        console.log(reservationJSON);
         return this.http.post(this.urlReservation + '/reserveBook', reservationJSON, {headers: headers});
     }
 
     getUserBooksRead(username?: string) {
         // da controllare questo username?
         return this.http.get(this.urlReservation + '/getReservationsBorrowed?username=' + username);
+    }
+
+    getUserBooksLend(username?: string) {
+        return this.http.get(this.urlReservation + '/getReservationsLend?username=' + username);
     }
 }

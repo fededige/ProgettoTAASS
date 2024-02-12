@@ -1,4 +1,5 @@
 import {user} from "./user";
+import {reservationUser} from "./reservationUser";
 
 export class reservationBook {
     id?: number
@@ -6,6 +7,6 @@ export class reservationBook {
     author?: string
     publishingDate?: Date
     available?: boolean
-    owner?: user
+    owner?: reservationUser
   constructor() { }
 }

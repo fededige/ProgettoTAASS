@@ -5,9 +5,9 @@ import {user} from "../model/user";
 import {ReservationApiService} from "../service-api/reservation-api.service";
 
 @Component({
-  selector: 'app-book-details',
-  templateUrl: './book-details.component.html',
-  styleUrl: './book-details.component.css'
+    selector: 'app-book-details',
+    templateUrl: './book-details.component.html',
+    styleUrl: './book-details.component.css'
 })
 export class BookDetailsComponent implements OnInit{
     title: any
@@ -35,9 +35,7 @@ export class BookDetailsComponent implements OnInit{
         });
         this.shareDataService.bookDetails$.subscribe((data: string) => {
             this.bookClicked = data;
-            console.log("bookClicked");
             this.bookClicked.loanDuration = this.transalateDuration(this.bookClicked.loanDuration);
-            console.log(this.bookClicked);
         });
         this.title = this.route.snapshot.paramMap.get('title')
     }
@@ -60,18 +58,22 @@ export class BookDetailsComponent implements OnInit{
     }
     reserveBook() {
         if(this.isLoggedin){
-            if(this.loggedUser != null && this.bookClicked.title != ""){
-                console.log(new Date());
-                this.reservationApiService.reserveBook(new Date(), this.bookClicked, this.loggedUser).subscribe({
-                    next: (data) => {
-                        console.log("TEMP: reservation success");
-                        console.log(data);
-                    },
-                    error: (err) => {
-                        console.log(err)
-                        console.log("TEMP: reservation error");
-                    }
-                });
+            if(this.loggedUser != null && this.bookClicked.title != "") {
+                if (this.loggedUser.username != this.bookClicked.owner.username) {
+                    this.reservationApiService.reserveBook(new Date(), this.bookClicked, this.loggedUser).subscribe({
+                        next: (data) => {
+                            console.log("TEMP: reservation success");
+                            console.log(data);
+                        },
+                        error: (err) => {
+                            console.log(err)
+                            console.log("TEMP: reservation error");
+                        }
+                    });
+                }
+                else {
+                    alert("Non puoi prenotare un tuo libro!");
+                }
             }
         }
     }

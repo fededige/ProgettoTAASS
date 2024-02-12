@@ -21,4 +21,12 @@ export class UserApiService {
         };
         return this.http.post(this.urlUser + '/insert', user, {headers: headers});
     }
+
+    updateCoins(idToken: string, username: string) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + idToken
+        });
+        return this.http.get(this.urlUser + '/getCoins?username=' + username, { headers: headers});
+    }
 }

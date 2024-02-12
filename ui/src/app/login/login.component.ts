@@ -3,6 +3,7 @@ import { SocialAuthService, SocialUser, GoogleLoginProvider} from "@abacritt/ang
 import { UserApiService } from "../service-api/user-api.service";
 import { ShareDataService } from "../service-api/share-data.service";
 import { user } from "../model/user";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     // loginForm!: FormGroup;
     isLoggedin?: boolean;
     loggedUser!: user;
-    constructor(private socialAuthService: SocialAuthService, private apiService: UserApiService, private shareDataService: ShareDataService) { }
+    constructor(private socialAuthService: SocialAuthService, private apiService: UserApiService, private shareDataService: ShareDataService, private router: Router) { }
     ngOnInit() {
         this.shareDataService.isLogged$.subscribe((data: boolean) => {
             this.isLoggedin = data;
@@ -25,16 +26,18 @@ export class LoginComponent implements OnInit {
 
         this.socialAuthService.authState.subscribe((user) => {
             console.log(user);
-            this.apiService.login(user.idToken, user.name, user.email)
+            this.apiService.login(user.idToken, user.email.split('@')[0], user.email)
                 .subscribe({
                     next: (data) => {
                         console.log("Authentication success");
-                        console.log(data);
                         this.isLoggedin = user != null;
                         this.loggedUser = data;
                         this.loggedUser.profileImg = user.photoUrl;
+                        this.loggedUser.idToken = user.idToken;
+                        console.log(this.loggedUser)
                         this.shareDataService.isLoggedObservable(this.isLoggedin);
                         this.shareDataService.loggedUserObservable(this.loggedUser);
+                        this.router.navigate(['/catalogo']);
                     },
                     error: (err) => {
                         console.log(err);
@@ -47,6 +50,10 @@ export class LoginComponent implements OnInit {
     }
     logOut(): void {
         this.socialAuthService.signOut();
+    }
+
+    checkUserLogged(){
+        return this.isLoggedin;
     }
 }
 

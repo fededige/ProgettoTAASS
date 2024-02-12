@@ -4,5 +4,6 @@ export class user {
     email?: string
     coins?: number
     profileImg?: string
+    idToken?: string
     constructor() { }
 }
