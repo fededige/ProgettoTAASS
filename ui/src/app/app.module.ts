@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common'
+import {CommonModule, NgOptimizedImage} from '@angular/common'
 import { HttpClientModule } from  '@angular/common/http';
 import { ReactiveFormsModule } from "@angular/forms";
 import {
@@ -39,6 +39,8 @@ import { FormsModule } from "@angular/forms";
 import { SuccessPageComponent } from './success-page/success-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileBooksComponent } from './profile-books/profile-books.component';
+import {PermissionsService} from "./service-api/permission.service";
+import { UnauthorizedPageComponent } from './unauthorized-page/unauthorized-page.component';
 
 @NgModule({
     declarations: [
@@ -58,6 +60,7 @@ import { ProfileBooksComponent } from './profile-books/profile-books.component';
         SuccessPageComponent,
         ProfileComponent,
         ProfileBooksComponent,
+        UnauthorizedPageComponent,
     ],
     imports: [
         CommonModule,
@@ -78,6 +81,7 @@ import { ProfileBooksComponent } from './profile-books/profile-books.component';
         ReactiveFormsModule,
         SocialLoginModule,
         GoogleSigninButtonModule,
+        NgOptimizedImage,
     ],
     providers: [
         {
@@ -92,6 +96,7 @@ import { ProfileBooksComponent } from './profile-books/profile-books.component';
                 ],
             } as SocialAuthServiceConfig,
         },
+        PermissionsService
     ],
     bootstrap: [AppComponent]
 })
