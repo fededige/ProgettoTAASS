@@ -1,48 +1,56 @@
 <div class="container">
-    <div class="row">
-        <div class="col-4">
-            <img src="{{ loggedUser.profileImg }}" alt="profile-image" class="img-fluid align-self-end" style="width: auto; height: 100px; border-radius: 50%"/>
+    <div class="row justify-content-center">
+        <div class="col-2 align-content-end">
+            <img src="{{ loggedUser.profileImg }}" alt="profile-image" class="img-fluid mb-4" style="width: auto; height: 100px; border-radius: 50%"/>
         </div>
         <div class="col-6">
-            <strong class="img-fluid align-self-end">Bentornato {{ loggedUser.username }}</strong>
-            <p>{{ loggedUser.email }}</p>
+            <div class="mt-3">
+                <strong class="img-fluid" style="font-size: 18pt;">Bentornato {{ loggedUser.username }}</strong>
+                <p class="mt-1" style="font-size: 15pt;">{{ loggedUser.email }}</p>
+            </div>
         </div>
         <div class="col-2">
-            <div class="coins-container">
-                <img src="assets/coin.png" alt="coin" class="img-fluid ml-2" style="width: auto; height: 50px"/>
-                <strong style="color: blue; font-size: 18pt; display: inline"> {{ loggedUser.coins }} </strong>
+            <div class="coins-container mt-2">
+                <div class="row justify-content-center">
+                    <div class="col-4 d-flex">
+                        <img src="assets/coin.png" alt="coin" class="img-fluid ml-1" style="width: auto; height: 50px"/>
+                    </div>
+                    <div class="col-5 d-flex">
+                        <strong class="mt-3" style="color: white; font-size: 20pt; display: inline"> {{ loggedUser.coins }} </strong>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="row info p-2">
         <!-- riga per i bottoni -->
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-4">
-                <button class="btn" (click)="libriLettiClick()" [ngClass]="{'active': selectedItem=='libriLetti'}"> Libri letti </button>
+                <button class="btn m-1" style="font-size: 18pt; padding: 0.5rem;" (click)="libriLettiClick()" [ngClass]="{'active': selectedItem=='libriLetti'}"> Libri letti </button>
             </div>
             <div class="col-4">
-                <button class="btn" (click)="libriPrestatiClick()" [ngClass]="{'active': selectedItem=='libriPrestati'}"> I miei libri </button>
+                <button class="btn m-1" style="font-size: 18pt; padding: 0.5rem;" (click)="libriPrestatiClick()" [ngClass]="{'active': selectedItem=='libriPrestati'}"> Libri prestati </button>
             </div>
             <div class="col-4">
-                <button class="btn" (click)="recensioniClick()" [ngClass]="{'active': selectedItem=='recensioni'}"> Le mie recensioni </button>
+                <button class="btn m-1" style="font-size: 18pt; padding: 0.5rem;" (click)="recensioniClick()" [ngClass]="{'active': selectedItem=='recensioni'}"> Le mie recensioni </button>
             </div>
         </div>
+
+        <hr class="m-2" style="background-color: #333333; height: 3px; width: 99%;" />
 
         <!-- riga per la visualizzazione del contenuto -->
         <div class="row" *ngIf="selectedItem=='libriLetti'">
             <div class="col-12 m-1" *ngFor="let reservation of userBooksRead; index as i ">
-                <app-profile-books [reservation]="reservation"></app-profile-books>
+                <app-profile-books [reservation]="reservation" [owner]="false"></app-profile-books>
             </div>
         </div>
         <div class="row" *ngIf="selectedItem=='libriPrestati'">
-            <!--<div class="col m-1" *ngFor="let reservation of userBooksRead; index as i ">
-                <app-profile-books [reservation]="reservation"></app-profile-books>
-            </div>-->
+            <div class="col-12 m-1" *ngFor="let reservation of userBooksLend; index as i ">
+                <app-profile-books [reservation]="reservation" [owner]="true"></app-profile-books>
+            </div>
         </div>
         <div class="row" *ngIf="selectedItem=='recensioni'">
-            <!--<div class="col m-1" *ngFor="let reservation of userBooksRead; index as i ">
-                <app-profile-books [reservation]="reservation"></app-profile-books>
-            </div>-->
+            <p>Work in progress...</p>
         </div>
     </div>
 </div>

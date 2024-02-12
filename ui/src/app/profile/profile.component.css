@@ -1,6 +1,6 @@
 .coins-container {
     border-radius: 15px;
-  /*background: linear-gradient(180deg, #B721FF 0%, rgba(64, 123, 255, 0.9) 100%); */
+    background: linear-gradient(180deg, #B721FF 0%, rgba(64, 123, 255, 0.9) 100%);
 }
 
 .info {
