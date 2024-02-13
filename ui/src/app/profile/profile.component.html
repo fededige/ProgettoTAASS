@@ -42,12 +42,12 @@
         <!-- riga per la visualizzazione del contenuto -->
         <div class="row" *ngIf="selectedItem=='libriLetti'">
             <div class="col-12 m-1" *ngFor="let reservation of userBooksRead; index as i ">
-                <app-profile-books [reservation]="reservation" [owner]="false"></app-profile-books>
+                <app-profile-books [reservation]="reservation" [owner]=false></app-profile-books>
             </div>
         </div>
         <div class="row" *ngIf="selectedItem=='libriPrestati'">
             <div class="col-12 m-1" *ngFor="let reservation of userBooksLend; index as i ">
-                <app-profile-books [reservation]="reservation" [owner]="true"></app-profile-books>
+                <app-profile-books [reservation]="reservation" [owner]=true></app-profile-books>
             </div>
         </div>
         <div class="row" *ngIf="selectedItem=='recensioni'">

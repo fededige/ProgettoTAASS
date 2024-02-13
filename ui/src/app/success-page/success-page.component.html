@@ -5,11 +5,11 @@
                 <img id="imgSuccess" src="assets/accept.png" class="img-fluid mt-2 mb-2" alt="success" style="" />
             </div>
             <div class="row align-items-center justify-content-center">
-                <h2 style="text-align: center">GRAZIE PER AVER INSERITO UN NUOVO LIBRO</h2>
-                <h2 style="text-align: center">A breve riceverai la tua ricompensa in coin</h2>
+                <h2 style="text-align: center">{{ title }}</h2>
+                <h2 style="text-align: center">{{ subtitle }}</h2>
             </div>
             <div class="row align-items-center justify-content-around">
-                <button style="width: 80%" class="btn btn-primary btn-lg btn-block form-control" [routerLink]="'/catalogo'" [routerLinkActive]="'active'">Torna al catalogo</button>
+                <button style="width: 80%" class="btn btn-primary btn-lg btn-block form-control" [routerLink]="'/' + navigateTo" [routerLinkActive]="'active'">Torna al {{ navigateTo }}</button>
             </div>
         </div>
     </div>

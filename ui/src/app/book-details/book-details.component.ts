@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ShareDataService} from "../service-api/share-data.service";
 import {user} from "../model/user";
 import {ReservationApiService} from "../service-api/reservation-api.service";
@@ -24,7 +24,8 @@ export class BookDetailsComponent implements OnInit{
     };
     isLoggedin?: boolean;
     loggedUser?: user;
-    constructor(private shareDataService: ShareDataService, private route: ActivatedRoute, private reservationApiService: ReservationApiService) {}
+    constructor(private shareDataService: ShareDataService, private route: ActivatedRoute,
+                private reservationApiService: ReservationApiService, private router: Router) {}
     star = [1, 2, 3, 4, 5];
     ngOnInit(): void {
         this.shareDataService.loggedUser$.subscribe((data: user) => {
@@ -64,6 +65,14 @@ export class BookDetailsComponent implements OnInit{
                         next: (data) => {
                             console.log("TEMP: reservation success");
                             console.log(data);
+                            const navigationExtras: NavigationExtras = {
+                                state: {
+                                    title: 'PRENOTAZIONE EFFETTUATA CON SUCCESSO!',
+                                    subtitle: 'Contatta il proprietario per prelevare il libro',
+                                    navigateTo: 'profilo'
+                                }
+                            }
+                            this.router.navigate(['/success'], navigationExtras);
                         },
                         error: (err) => {
                             console.log(err)

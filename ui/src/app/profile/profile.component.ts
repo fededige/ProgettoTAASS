@@ -3,7 +3,6 @@ import { user } from "../model/user";
 import { ShareDataService } from "../service-api/share-data.service";
 import {ReservationApiService} from "../service-api/reservation-api.service";
 import {UserApiService} from "../service-api/user-api.service";
-import {BookApiService} from "../service-api/book-api.service";
 import {SocialAuthService} from "@abacritt/angularx-social-login";
 import {Router} from "@angular/router";
 
@@ -33,6 +32,7 @@ export class ProfileComponent implements OnInit {
                 this.loggedUser.coins = data;
             });
         }
+        console.log("OnInit");
     }
 
     libriLettiClick() {

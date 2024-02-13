@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { BookApiService } from "../service-api/book-api.service";
-import { Router } from "@angular/router";
+import {NavigationExtras, Router} from "@angular/router";
 import {ShareDataService} from "../service-api/share-data.service";
 import {user} from "../model/user";
 
@@ -60,8 +60,16 @@ export class InputBookComponent implements OnInit{
             this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover, this.loggedUser)
                 .subscribe({
                     next: (data) => {
-                        if(data.status == 200)
-                            this.router.navigate(['/success'])
+                        if(data.status == 200) {
+                            const navigationExtras: NavigationExtras = {
+                                state: {
+                                    title: 'GRAZIE PER AVER INSERITO UN NUOVO LIBRO!',
+                                    subtitle: 'A breve riceverai la tua ricompensa in coin',
+                                    navigateTo: 'catalogo'
+                                }
+                            }
+                            this.router.navigate(['/success'], navigationExtras);
+                        }
                     },
                     error: (err) => {
                         console.log(err)

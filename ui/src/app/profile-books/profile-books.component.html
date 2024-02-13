@@ -5,11 +5,11 @@
     <div class="postcard__text t-dark">
         <h1 class="postcard__title blue" style="color: black;"><strong>{{ book == null ? '' : book.title }}</strong> di {{ book== null ? '' : book.author }}</h1>
         <div class="postcard__subtitle small" style="color: black; font-size: 12pt;">
-            <time datetime="2020-05-25 12:00:00" [hidden]="!owner">
-                <i class="fa fa-calendar mr-2"></i>Preso in prestito il {{ book == null ? '' : book.publishingDate }}
+            <time datetime="2020-05-25 12:00:00" *ngIf="!owner">
+                <i class="fa fa-calendar mr-2"></i>Preso in prestito il {{ reservation == null ? '' : reservation.date.toString().split(" ")[0] }} alle {{ reservation.date.toString().split(".")[0].substring(11, 16) }}
             </time>
-            <time datetime="2020-05-25 12:00:00" [hidden]="owner">
-                <i class="fa fa-calendar mr-2"></i>Prestato il {{ book == null ? '' : book.publishingDate }}
+            <time datetime="2020-05-25 12:00:00" *ngIf="owner">
+                <i class="fa fa-calendar mr-2"></i>Prestato il {{ book == null ? '' : reservation.date.toString().split(" ")[0] }} alle {{ reservation.date.toString().split(".")[0].substring(11, 16) }}
             </time>
         </div>
         <div class="postcard__bar"></div>
@@ -17,8 +17,13 @@
         <ul class="postcard__tagbox">
             <li class="tag__item play blue"><i class="fa fa-tag mr-2"></i>Genere: {{ book == null ? '' : book.genre }}</li>
             <li class="tag__item play blue"><i class="fa fa-clock-o mr-2"></i>Casa editrice: {{ book == null ? '' : book.publisher }}</li>
-            <li class="tag__item play blue" [hidden]="owner"><i class="fa fa-user mr-2"></i>Lettore: {{ book == null ? '' : book.owner.username }}</li>
-            <li class="tag__item play blue" [hidden]="!owner"><i class="fa fa-user mr-2"></i>Proprietario: {{ book == null ? '' : book.owner.username }}</li>
+            <li class="tag__item play blue" *ngIf="owner"><i class="fa fa-user mr-2"></i>Lettore: {{ book == null ? '' : book.owner.username }}</li>
+            <li class="tag__item play blue" *ngIf="!owner"><i class="fa fa-user mr-2"></i>Proprietario: {{ book == null ? '' : book.owner.username }}</li>
         </ul>
+        <button class="btn btn-primary mt-3 align-self-center" *ngIf="!reservation.returned && !owner" style="width: 100%" (click)="restituisci(reservation.id)">Restituisci</button>
+        <strong style="color: red" *ngIf="!reservation.returned && owner">Libro non ancora restituito!</strong>
+        <strong style="color: green" *ngIf="reservation.returned">Libro già restituito!</strong>
+        <strong *ngIf="!owner && returnMessage == 1 && !reservation.returned" style="color: red">Sei in ritardo per la restituzione del libro</strong>
+        <strong *ngIf="!owner && returnMessage == 2 && !reservation.returned" style="color: orange" class="mt-2">Sei a metà del tempo concesso</strong>
     </div>
 </article>

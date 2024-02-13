@@ -43,4 +43,8 @@ export class ReservationApiService {
     getUserBooksLend(username?: string) {
         return this.http.get(this.urlReservation + '/getReservationsLend?username=' + username);
     }
+
+    makeBookAvailable(id: number) {
+        return this.http.get(this.urlReservation + '/makeAvailable/' + id);
+    }
 }
