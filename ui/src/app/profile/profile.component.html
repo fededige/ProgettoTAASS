@@ -7,6 +7,7 @@
             <div class="mt-3">
                 <strong class="img-fluid" style="font-size: 18pt;">Bentornato {{ loggedUser.username }}</strong>
                 <p class="mt-1" style="font-size: 15pt;">{{ loggedUser.email }}</p>
+                <button class="btn btn-danger" (click)="logOut()">Log out</button>
             </div>
         </div>
         <div class="col-2">

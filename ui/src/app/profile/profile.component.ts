@@ -4,6 +4,8 @@ import { ShareDataService } from "../service-api/share-data.service";
 import {ReservationApiService} from "../service-api/reservation-api.service";
 import {UserApiService} from "../service-api/user-api.service";
 import {BookApiService} from "../service-api/book-api.service";
+import {SocialAuthService} from "@abacritt/angularx-social-login";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-profile',
@@ -12,16 +14,19 @@ import {BookApiService} from "../service-api/book-api.service";
 })
 export class ProfileComponent implements OnInit {
     loggedUser!: user;
+    isLoggedin!: boolean;
     userBooksRead: any[] = [];
     userBooksLend: any[] = [];
-    userBookInsert: any[] = []
     selectedItem: string = "";
 
     constructor(private shareDataService: ShareDataService, private apiReservationService: ReservationApiService,
-                private apiUserService: UserApiService, private apiBookService: BookApiService) { }
+                private apiUserService: UserApiService, private socialAuthService: SocialAuthService, private router: Router) { }
     ngOnInit() {
         this.shareDataService.loggedUser$.subscribe((data: user) => {
             this.loggedUser = data;
+        });
+        this.shareDataService.isLogged$.subscribe((data: boolean) => {
+            this.isLoggedin = data;
         });
         if(this.loggedUser.username != null && this.loggedUser.idToken != null) {
             this.apiUserService.updateCoins(this.loggedUser.idToken, this.loggedUser.username).subscribe((data: any) => {
@@ -56,5 +61,15 @@ export class ProfileComponent implements OnInit {
 
     recensioniClick() {
         this.selectedItem = "recensioni"
+    }
+
+    logOut(): void {
+        sessionStorage.clear();
+        this.isLoggedin = false;
+        //this.loggedUser = null;
+        this.shareDataService.isLoggedObservable(this.isLoggedin);
+        // this.shareDataService.loggedUserObservable(this.loggedUser);
+        this.socialAuthService.signOut();
+        this.router.navigate(['/']);
     }
 }

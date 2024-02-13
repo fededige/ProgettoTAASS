@@ -12,10 +12,14 @@ export class PermissionsService {
         });
     };
     canActivate(): boolean {
-        if(!(this.isLoggedin == null ? false : this.isLoggedin)){
-            this.router.navigate(['/unauthorized']);
-        }
-        return this.isLoggedin == null ? false : this.isLoggedin;
+        console.log("canActivate");
+        if(sessionStorage.getItem("idToken") == null) {
+            if (!(this.isLoggedin == null ? false : this.isLoggedin)) {
+                console.log("canActivate");
+                this.router.navigate(['/unauthorized']);
+            }
+            return this.isLoggedin == null ? false : this.isLoggedin;
+        } else return true;
     }
 }
 

@@ -26,31 +26,36 @@ export class LoginComponent implements OnInit {
 
         this.socialAuthService.authState.subscribe((user) => {
             console.log(user);
-            this.apiService.login(user.idToken, user.email.split('@')[0], user.email)
-                .subscribe({
-                    next: (data) => {
-                        console.log("Authentication success");
-                        this.isLoggedin = user != null;
-                        this.loggedUser = data;
-                        this.loggedUser.profileImg = user.photoUrl;
-                        this.loggedUser.idToken = user.idToken;
-                        console.log(this.loggedUser)
-                        this.shareDataService.isLoggedObservable(this.isLoggedin);
-                        this.shareDataService.loggedUserObservable(this.loggedUser);
-                        this.router.navigate(['/catalogo']);
-                    },
-                    error: (err) => {
-                        console.log(err);
-                    }
-                });
+            if(user != null){
+                this.apiService.login(user.idToken, user.email.split('@')[0], user.email)
+                    .subscribe({
+                        next: (data) => {
+                            console.log("Authentication success");
+                            this.isLoggedin = user != null;
+                            this.loggedUser = data;
+                            this.loggedUser.profileImg = user.photoUrl;
+                            this.loggedUser.idToken = user.idToken;
+                            console.log(this.loggedUser)
+                            this.shareDataService.isLoggedObservable(this.isLoggedin);
+                            this.shareDataService.loggedUserObservable(this.loggedUser);
+                            sessionStorage.setItem("idToken", this.loggedUser.idToken);
+                            sessionStorage.setItem("email", user.email);
+                            sessionStorage.setItem("photoUrl", user.photoUrl);
+                            console.log(this.router.url);
+                            this.router.navigate(['/catalogo']);
+
+                        },
+                        error: (err) => {
+                            console.log(err);
+                        }
+                    });
+            }
         });
     }
     loginWithGoogle(): void {
         this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
     }
-    logOut(): void {
-        this.socialAuthService.signOut();
-    }
+
 
     checkUserLogged(){
         return this.isLoggedin;
