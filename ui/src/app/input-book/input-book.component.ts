@@ -56,8 +56,8 @@ export class InputBookComponent implements OnInit{
         else if(this.selectedFile != null){
             cover = this.selectedFile["src"];
         }
-        if(this.isLogged && this.loggedUser != null){
-            this.apiService.insertBook(titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover, this.loggedUser)
+        if(this.isLogged && this.loggedUser != null && this.loggedUser.idToken != null){
+            this.apiService.insertBook(this.loggedUser.idToken, titolo, autore, annoPubblicazione, genere, durataPrestito, condizioni, casaEditrice, plot, cover, this.loggedUser)
                 .subscribe({
                     next: (data) => {
                         if(data.status == 200) {

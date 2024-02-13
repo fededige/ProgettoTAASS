@@ -52,28 +52,31 @@ export class ProfileBooksComponent implements OnInit {
 
     restituisci(reservationId?: number){
         if(reservationId != null) {
-            this.apiReservationService.makeBookAvailable(reservationId).subscribe({
-                next: (data) => {
-                    console.log("make book available success");
-                    // let tempSelectedItem = this.selectedItem;
-                    // window.location.reload();
-                    // if(tempSelectedItem != null) {
-                    //     console.log(tempSelectedItem);
-                    //     this.shareDataService.selectedItemObservable(tempSelectedItem);
-                    // }
-                    const navigationExtras: NavigationExtras = {
-                        state: {
-                            title: 'LIBRO RESTITUITO CON SUCCESSO!',
-                            subtitle: '',
-                            navigateTo: 'profilo'
+            let idToken = sessionStorage.getItem("idToken");
+            if(idToken != null) {
+                this.apiReservationService.makeBookAvailable(idToken, reservationId).subscribe({
+                    next: (data) => {
+                        console.log("make book available success");
+                        // let tempSelectedItem = this.selectedItem;
+                        // window.location.reload();
+                        // if(tempSelectedItem != null) {
+                        //     console.log(tempSelectedItem);
+                        //     this.shareDataService.selectedItemObservable(tempSelectedItem);
+                        // }
+                        const navigationExtras: NavigationExtras = {
+                            state: {
+                                title: 'LIBRO RESTITUITO CON SUCCESSO!',
+                                subtitle: '',
+                                navigateTo: 'profilo'
+                            }
                         }
+                        this.router.navigate(['/success'], navigationExtras);
+                    },
+                    error: (err) => {
+                        console.log(err);
                     }
-                    this.router.navigate(['/success'], navigationExtras);
-                },
-                error: (err) => {
-                    console.log(err);
-                }
-            });
+                });
+            }
         }
     }
 

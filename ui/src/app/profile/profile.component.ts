@@ -38,25 +38,29 @@ export class ProfileComponent implements OnInit {
     libriLettiClick() {
         this.selectedItem = "libriLetti";
         this.userBooksRead = [];
-        this.apiReservationService.getUserBooksRead(this.loggedUser.username).subscribe((data: any) => {
-            console.log(data);
-            for(let i = 0; i < data.length; i++){
-                let dataJSON = JSON.parse(data[i]);
-                this.userBooksRead.push(dataJSON);
-            }
-        });
+        if(this.loggedUser.idToken != null){
+            this.apiReservationService.getUserBooksRead(this.loggedUser.idToken, this.loggedUser.username).subscribe((data: any) => {
+                console.log(data);
+                for(let i = 0; i < data.length; i++){
+                    let dataJSON = JSON.parse(data[i]);
+                    this.userBooksRead.push(dataJSON);
+                }
+            });
+        }
     }
 
     libriPrestatiClick() {
         this.selectedItem = "libriPrestati"
         this.userBooksLend = [];
-        this.apiReservationService.getUserBooksLend(this.loggedUser.username).subscribe((data: any) => {
-           console.log(data);
-           for(let i = 0; i < data.length; i++) {
-               let dataJSON = JSON.parse(data[i]);
-               this.userBooksLend.push(dataJSON);
-           }
-        });
+        if(this.loggedUser.idToken != null) {
+            this.apiReservationService.getUserBooksLend(this.loggedUser.idToken, this.loggedUser.username).subscribe((data: any) => {
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    let dataJSON = JSON.parse(data[i]);
+                    this.userBooksLend.push(dataJSON);
+                }
+            });
+        }
     }
 
     recensioniClick() {

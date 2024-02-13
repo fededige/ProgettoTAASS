@@ -13,8 +13,11 @@ export class ReservationApiService {
     constructor(private http: HttpClient) { }
     private urlReservation = 'http://localhost:8080/reservation';
 
-    reserveBook(date: Date, book: any, user: user){
-        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    reserveBook(idToken: string, date: Date, book: any, user: user){
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + idToken
+        });
         let reservation: reservation = {
             date: date,
             book: new reservationBook(),
@@ -35,16 +38,27 @@ export class ReservationApiService {
         return this.http.post(this.urlReservation + '/reserveBook', reservationJSON, {headers: headers});
     }
 
-    getUserBooksRead(username?: string) {
-        // da controllare questo username?
-        return this.http.get(this.urlReservation + '/getReservationsBorrowed?username=' + username);
+    getUserBooksRead(idToken: string, username?: string) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + idToken
+        });
+        return this.http.get(this.urlReservation + '/getReservationsBorrowed?username=' + username, { headers: headers });
     }
 
-    getUserBooksLend(username?: string) {
-        return this.http.get(this.urlReservation + '/getReservationsLend?username=' + username);
+    getUserBooksLend(idToken: string, username?: string) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + idToken
+        });
+        return this.http.get(this.urlReservation + '/getReservationsLend?username=' + username, { headers: headers });
     }
 
-    makeBookAvailable(id: number) {
-        return this.http.get(this.urlReservation + '/makeAvailable/' + id);
+    makeBookAvailable(idToken: string, id: number) {
+    let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + idToken
+    });
+        return this.http.get(this.urlReservation + '/makeAvailable/' + id, { headers: headers });
     }
 }

@@ -60,8 +60,8 @@ export class BookDetailsComponent implements OnInit{
     reserveBook() {
         if(this.isLoggedin){
             if(this.loggedUser != null && this.bookClicked.title != "") {
-                if (this.loggedUser.username != this.bookClicked.owner.username) {
-                    this.reservationApiService.reserveBook(new Date(), this.bookClicked, this.loggedUser).subscribe({
+                if (this.loggedUser.username != this.bookClicked.owner.username && this.loggedUser.idToken != null) {
+                    this.reservationApiService.reserveBook(this.loggedUser.idToken, new Date(), this.bookClicked, this.loggedUser).subscribe({
                         next: (data) => {
                             console.log("TEMP: reservation success");
                             console.log(data);

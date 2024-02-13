@@ -9,7 +9,7 @@ export class BookApiService {
     constructor(private http: HttpClient) { }
     private urlCatalog = 'http://localhost:8080/catalog';
 
-    insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
+    insertBook(idToken: string, titolo: string, autore: string, annoPubblicazione: string, genere: string,
                durataPrestito: string, condizioni: string, casaEditrice: string, plot: string, cover: any, loggedUser: user){
         let book = {
             title : titolo,
@@ -31,7 +31,10 @@ export class BookApiService {
         }
         console.log(book);
         let bookJSON = JSON.stringify(book);
-        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + idToken
+        });
         console.log(bookJSON);
         return this.http.post(this.urlCatalog + '/insert', bookJSON, { headers: headers, observe: 'response' });  // observe: 'response' serve per far ritornare in data lo status della risposta
     }
