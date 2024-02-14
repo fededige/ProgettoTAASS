@@ -1,23 +1,24 @@
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-2 align-content-end">
-            <img src="{{ loggedUser.profileImg }}" alt="profile-image" class="img-fluid mb-4" style="width: auto; height: 100px; border-radius: 50%"/>
+    <div class="row justify-content-center mb-2">
+        <div class="col-lg-2 col-md-4 col-sm-4 col-5 d-none d-sm-block align-content-end">
+            <img src="{{ loggedUser.profileImg }}" alt="profile-image" class="img-fluid mb-4" style="width: auto; max-height: 100px; border-radius: 50%"/>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-5 col-sm-8 col-12">
             <div class="mt-3">
                 <strong class="img-fluid" style="font-size: 18pt;">Bentornato {{ loggedUser.username }}</strong>
                 <p class="mt-1" style="font-size: 15pt;">{{ loggedUser.email }}</p>
                 <button class="btn btn-danger" (click)="logOut()">Log out</button>
             </div>
         </div>
-        <div class="col-2">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
             <div class="coins-container mt-2">
                 <div class="row justify-content-center">
-                    <div class="col-4 d-flex">
+<!--                    d-none d-md-block-->
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-6 d-flex">
                         <img src="assets/coin.png" alt="coin" class="img-fluid ml-1" style="width: auto; height: 50px"/>
                     </div>
-                    <div class="col-5 d-flex">
-                        <strong class="mt-3" style="color: white; font-size: 20pt; display: inline"> {{ loggedUser.coins }} </strong>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-5 d-flex">
+                        <strong class="mt-3 mb-3" style="color: white; font-size: 20pt; display: inline"> {{ loggedUser.coins }} </strong>
                     </div>
                 </div>
             </div>
@@ -44,11 +45,13 @@
             <div class="col-12 m-1" *ngFor="let reservation of userBooksRead; index as i ">
                 <app-profile-books [reservation]="reservation" [owner]=false></app-profile-books>
             </div>
+            <p *ngIf="userBooksRead.length == 0">Non ha ancora preso in prestito alcun libro!</p>
         </div>
         <div class="row" *ngIf="selectedItem=='libriPrestati'">
             <div class="col-12 m-1" *ngFor="let reservation of userBooksLend; index as i ">
                 <app-profile-books [reservation]="reservation" [owner]=true></app-profile-books>
             </div>
+            <p *ngIf="userBooksLend.length == 0">Non ha ancora prestato alcun libro!</p>
         </div>
         <div class="row" *ngIf="selectedItem=='recensioni'">
             <p>Work in progress...</p>
