@@ -42,6 +42,8 @@ export class InputBookComponent implements OnInit{
 
     public coverToShow?: string;
 
+    public foundISBN: boolean = true;
+
     insertBook(titolo: string, autore: string, annoPubblicazione: string, genere: string,
                durataPrestito: string, condizioni: string, casaEditrice: string, plot: string) {
         if(titolo == "" || autore == "" || annoPubblicazione == "" ||
@@ -83,24 +85,29 @@ export class InputBookComponent implements OnInit{
             this.apiService.isbnAPI(isbn).subscribe((data: any) => {
                 this.books = [];
                 const items = data["items"];
-                for (let i  = 0; i < items.length; i++){
-                    let bookCover: string;
-                    if(items[i]["volumeInfo"].hasOwnProperty("imageLinks")){
-                        bookCover = items[i]["volumeInfo"]["imageLinks"]["thumbnail"];
-                    } else {
-                        bookCover = ""
+                if(items != null){
+                    this.foundISBN = true;
+                    for (let i  = 0; i < items.length; i++){
+                        let bookCover: string;
+                        if(items[i]["volumeInfo"].hasOwnProperty("imageLinks")){
+                            bookCover = items[i]["volumeInfo"]["imageLinks"]["thumbnail"];
+                        } else {
+                            bookCover = ""
+                        }
+                        this.books?.push({
+                            title : items[i]["volumeInfo"].hasOwnProperty("title") ?
+                                items[i]["volumeInfo"]["title"] : "",
+                            author : items[i]["volumeInfo"].hasOwnProperty("authors") ?
+                                items[i]["volumeInfo"]["authors"][0] : "",
+                            publishedDate : items[i]["volumeInfo"].hasOwnProperty("publishedDate") ?
+                                items[i]["volumeInfo"]["publishedDate"] : "",
+                            cover: bookCover,
+                            plot : items[i]["volumeInfo"].hasOwnProperty("description") ?
+                                items[i]["volumeInfo"]["description"] : "",
+                        });
                     }
-                    this.books?.push({
-                        title : items[i]["volumeInfo"].hasOwnProperty("title") ?
-                            items[i]["volumeInfo"]["title"] : "",
-                        author : items[i]["volumeInfo"].hasOwnProperty("authors") ?
-                            items[i]["volumeInfo"]["authors"][0] : "",
-                        publishedDate : items[i]["volumeInfo"].hasOwnProperty("publishedDate") ?
-                            items[i]["volumeInfo"]["publishedDate"] : "",
-                        cover: bookCover,
-                        plot : items[i]["volumeInfo"].hasOwnProperty("description") ?
-                            items[i]["volumeInfo"]["description"] : "",
-                    });
+                } else {
+                    this.foundISBN = false;
                 }
             });
         }

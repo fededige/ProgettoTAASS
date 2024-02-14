@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'catalogo', component: CatalogoComponent},
     { path: 'catalogo/:title', component: BookDetailsComponent},
     { path: 'inserisci-libro', component: InputBookComponent, canActivate: [canActivateTeam]},
-    { path: 'annunci', component:  AnnunciComponent},
+    { path: 'recensioni', component:  AnnunciComponent},
     { path: 'login', component:  LoginComponent },
     { path: 'success', component: SuccessPageComponent, canActivate: [canActivateTeam]},
     { path: 'unauthorized', component: UnauthorizedPageComponent},
